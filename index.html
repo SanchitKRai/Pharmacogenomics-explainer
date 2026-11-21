@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An educational pharmacogenomics explainer for consumer raw genotype files.">
+  <title>GeneGuide — Pharmacogenomics Explainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="GeneGuide home"><span class="brand-mark">G</span><span>gene<span class="brand-light">guide</span></span></a>
+    <div class="top-meta"><span class="live-dot"></span> EDUCATIONAL RESEARCH PROTOTYPE <span class="top-divider">/</span> v0.1</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> PHARMACOGENOMICS, MADE UNDERSTANDABLE</div>
+      <h1>Your DNA.<br><span class="gradient-text">A clearer picture</span><br>of drug response.</h1>
+      <p class="hero-copy">Explore how selected genetic markers connect to pharmacogenomics research and CPIC guideline topics — translated into plain language, without pretending a consumer file is a clinical test.</p>
+      <div class="hero-pills"><span>01 / Parse raw genotype</span><span>02 / Match known markers</span><span>03 / Explore guideline context</span></div>
+    </section>
+
+    <section class="upload-layout">
+      <div class="upload-card glass">
+        <div class="card-topline"><span class="step-number">01</span><span class="section-kicker">START WITH YOUR DATA</span><span class="privacy-label"><span class="lock-icon">◆</span> LOCAL PROCESSING</span></div>
+        <h2>Bring your raw data.</h2>
+        <p class="muted">Select a 23andMe-style <code>.txt</code> export. Your file is parsed in this browser; this demo has no genotype upload service.</p>
+        <label class="dropzone" id="dropzone" for="genomeFile">
+          <input id="genomeFile" type="file" accept=".txt,.tsv,text/plain,text/tab-separated-values">
+          <span class="upload-icon">↑</span>
+          <strong>Drop your raw data file here</strong>
+          <span class="drop-sub">or <u>browse files</u> · TXT / TSV</span>
+          <span class="file-chip" id="fileChip" hidden></span>
+        </label>
+        <div class="upload-actions">
+          <button id="analyzeBtn" class="button button-primary" disabled>Analyze markers <span>↗</span></button>
+          <button id="demoBtn" class="button button-ghost">Try synthetic demo data</button>
+        </div>
+        <div class="format-note"><span class="note-icon">i</span><span>Expected columns: <code>rsid&nbsp;&nbsp; chromosome&nbsp;&nbsp; position&nbsp;&nbsp; genotype</code></span></div>
+      </div>
+
+      <aside class="trust-card">
+        <div class="trust-icon">⌁</div>
+        <div class="section-kicker">BUILT FOR TRANSPARENCY</div>
+        <h3>Not every missing marker is a normal result.</h3>
+        <p>Consumer genotyping arrays test selected locations. Missing data means <em>not assessed in this file</em> — not a confirmed reference allele.</p>
+        <div class="trust-rule"></div>
+        <div class="trust-stat"><strong>01</strong><span>Marker presence, not a diagnosis</span></div>
+        <div class="trust-stat"><strong>02</strong><span>No unsupported phenotype guesses</span></div>
+        <div class="trust-stat"><strong>03</strong><span>Guideline sources shown transparently</span></div>
+      </aside>
+    </section>
+
+    <section id="resultsSection" class="results-section" hidden>
+      <div class="results-heading">
+        <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR FILE, DECODED</div><h2>Marker overview<span class="period">.</span></h2></div>
+        <button id="resetBtn" class="button button-ghost">Clear results ↺</button>
+      </div>
+      <div class="summary-grid" id="summaryGrid"></div>
+      <div class="notice-banner"><span class="notice-symbol">!</span><p><strong>Read this before interpreting:</strong> These are marker-level matches, not star-allele calls, diplotypes, metabolizer phenotypes, or prescribing recommendations. A panel match does not establish clinical status.</p></div>
+      <div class="results-list" id="resultsList"></div>
+      <div class="not-found-wrap" id="notFoundWrap"></div>
+      <div class="data-footnote">Analysis is performed locally in your browser. No genome file is sent to a server by this static demo.</div>
+    </section>
+
+    <section class="how-section">
+      <div class="eyebrow"><span class="eyebrow-line"></span> HOW IT WORKS</div>
+      <h2>Small steps. <span class="muted-title">Clear boundaries.</span></h2>
+      <div class="how-grid">
+        <article><span class="how-num">01</span><h3>Parse</h3><p>Read rsIDs and genotype calls from a tab-separated text export, skipping metadata comments.</p></article>
+        <article><span class="how-num">02</span><h3>Match</h3><p>Compare only against a documented educational marker panel. Unknown or absent markers stay unknown.</p></article>
+        <article><span class="how-num">03</span><h3>Explain</h3><p>Connect a marker to a gene, drug context, and authoritative guideline resource — without prescribing.</p></article>
+      </div>
+    </section>
+
+    <section class="sources-section">
+      <div class="eyebrow"><span class="eyebrow-line"></span> REFERENCE DESK</div>
+      <h2>Grounded in public resources<span class="period">.</span></h2>
+      <div class="source-links">
+        <a href="https://cpicpgx.org/guidelines/" target="_blank" rel="noopener noreferrer"><span>CPIC Guidelines</span><b>↗</b><small>Clinical guideline library</small></a>
+        <a href="https://www.clinpgx.org/page/cpicResources" target="_blank" rel="noopener noreferrer"><span>ClinPGx Resources</span><b>↗</b><small>Structured data and API</small></a>
+        <a href="https://support.23andme.org/hc/en-us/articles/42965238938391-Navigating-Your-Raw-Data" target="_blank" rel="noopener noreferrer"><span>Raw Data Limitations</span><b>↗</b><small>23andMe support guidance</small></a>
+      </div>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">G</span><span>gene<span class="brand-light">guide</span></span></a><span>Built for learning, not clinical decision-making.</span><span>© 2026 GENE GUIDE</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
