@@ -7,10 +7,10 @@ const marker = { rsid: "rs4244285" };
 test("parses a 23andMe-style tab-separated row and skips comments", () => {
   const parsed = parseRawData([
     "# generated raw genotype file",
-    "# rsid\\tchromosome\\tposition\\tgenotype",
-    "rs4244285\\t10\\t96521657\\tAG",
-    "i713426\\t1\\t787173\\t--"
-  ].join("\\n"));
+    "# rsid\tchromosome\tposition\tgenotype",
+    "rs4244285\t10\t96521657\tAG",
+    "i713426\t1\t787173\t--"
+  ].join("\n"));
 
   assert.equal(parsed.validRows, 2);
   assert.equal(parsed.skippedRows, 0);
@@ -19,7 +19,7 @@ test("parses a 23andMe-style tab-separated row and skips comments", () => {
 });
 
 test('keeps a "--" no-call as present-but-unknown, not absent', () => {
-  const parsed = parseRawData("rs4244285\\t10\\t96521657\\t--");
+  const parsed = parseRawData("rs4244285\t10\t96521657\t--");
   const assessment = classifyMarker(marker, parsed);
 
   assert.equal(parsed.validRows, 1);
@@ -29,13 +29,13 @@ test('keeps a "--" no-call as present-but-unknown, not absent', () => {
 
 test("classifies indel codes and single-base calls as unknown for this SNP panel", () => {
   for (const genotype of ["DI", "II", "A"]) {
-    const parsed = parseRawData("rs4244285\\t10\\t96521657\\t" + genotype);
+    const parsed = parseRawData("rs4244285\t10\t96521657\t" + genotype);
     assert.equal(classifyMarker(marker, parsed).status, "unknown", genotype);
   }
 });
 
 test("classifies malformed genotype strings as unknown while preserving row presence", () => {
-  const parsed = parseRawData("rs4244285\\t10\\t96521657\\tA?");
+  const parsed = parseRawData("rs4244285\t10\t96521657\tA?");
   const assessment = classifyMarker(marker, parsed);
 
   assert.equal(parsed.validRows, 1);
@@ -45,9 +45,9 @@ test("classifies malformed genotype strings as unknown while preserving row pres
 
 test("classifies duplicate rsIDs as unknown rather than choosing a call", () => {
   const parsed = parseRawData([
-    "rs4244285\\t10\\t96521657\\tAG",
-    "rs4244285\\t10\\t96521657\\tGG"
-  ].join("\\n"));
+    "rs4244285\t10\t96521657\tAG",
+    "rs4244285\t10\t96521657\tGG"
+  ].join("\n"));
 
   assert.equal(parsed.duplicateRows, 1);
   assert.equal(classifyMarker(marker, parsed).status, "unknown");
@@ -55,7 +55,7 @@ test("classifies duplicate rsIDs as unknown rather than choosing a call", () => 
 });
 
 test("classifies a marker absent from the file as not_found", () => {
-  const parsed = parseRawData("rs9999999\\t1\\t12345\\tAA");
+  const parsed = parseRawData("rs9999999\t1\t12345\tAA");
   const assessment = classifyMarker(marker, parsed);
 
   assert.equal(assessment.status, "not_found");
@@ -63,12 +63,12 @@ test("classifies a marker absent from the file as not_found", () => {
 });
 
 test("skips structurally invalid rows and throws when no valid rows remain", () => {
-  const parsed = parseRawData([
-    "not-an-rsid\\t10\\t96521657\\tAG",
-    "rs4244285\\tchr10\\t96521657\\tAG",
-    "rs4986893\\t10\\tposition\\tGG",
+  const invalid = [
+    "not-an-rsid\t10\t96521657\tAG",
+    "rs4244285\tchr10\t96521657\tAG",
+    "rs4986893\t10\tposition\tGG",
     "rs4244285"
-  ].join("\\n"));
+  ].join("\n");
 
-  assert.equal(parsed.validRows, 0);
+  assert.throws(() => parseRawData(invalid), /No structurally valid genotype rows/);
 });
