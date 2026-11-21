@@ -5,6 +5,7 @@ const index=await readFile(new URL("../index.html",import.meta.url),"utf8");
 const app=await readFile(new URL("../app.js",import.meta.url),"utf8");
 const css=await readFile(new URL("../styles.css",import.meta.url),"utf8");
 test("browser page exposes upload, build and format elements with guardrail",()=>{
+ // Parser dropzone supports .txt, .tsv and .vcf inputs.
  assert.match(index,/<script type="module" src="app\.js"><\/script>/);
  for(const id of ["genomeFile","buildBadge","formatBadge","summaryGrid","resultsList","unknownWrap","notFoundWrap","resetBtn","analyzeBtn","demoBtn"])assert.ok(index.includes('id="'+id+'"'),"missing "+id);
  assert.match(index,/MARKER MATCH ONLY — not a clinical phenotype or prescribing recommendation/);
