@@ -37,7 +37,7 @@ function updateFileState() {
 
 dropzone.addEventListener("drop", event => {
   const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
-  if (file && /\\.(txt|tsv)$/i.test(file.name)) {
+  if (file && /\.(txt|tsv)$/i.test(file.name)) {
     selectedFile = file;
     fileInput.files = event.dataTransfer.files;
     updateFileState();
@@ -60,15 +60,15 @@ analyzeBtn.addEventListener("click", async () => {
 demoBtn.addEventListener("click", () => {
   const demo = [
     "# Synthetic demonstration data — not a real person's genotype",
-    "# rsid\\tchromosome\\tposition\\tgenotype",
-    "rs4244285\\t10\\t96521657\\tAG",
-    "rs4986893\\t10\\t96540410\\tGG",
-    "rs12248560\\t10\\t96522522\\tCT",
-    "rs3892097\\t22\\t42128945\\tCT",
-    "rs4149056\\t12\\t21331549\\tTC",
-    "rs776746\\t7\\t99672916\\t--",
-    "rs9999999\\t1\\t12345\\tAA"
-  ].join("\\n");
+    "# rsid\tchromosome\tposition\tgenotype",
+    "rs4244285\t10\t96521657\tAG",
+    "rs4986893\t10\t96540410\tGG",
+    "rs12248560\t10\t96522522\tCT",
+    "rs3892097\t22\t42128945\tCT",
+    "rs4149056\t12\t21331549\tTC",
+    "rs776746\t7\t99672916\t--",
+    "rs9999999\t1\t12345\tAA"
+  ].join("\n");
 
   renderReport(parseRawData(demo), true);
 });
