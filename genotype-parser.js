@@ -5,7 +5,7 @@
  * normalize reference strand/build or infer alleles, diplotypes, phenotypes,
  * drug response, or clinical recommendations.
  */
-const RSID_PATTERN = /^(?:rs\\d+|i\\d+)$/i;
+const RSID_PATTERN = /^(?:rs\d+|i\d+)$/i;
 const CHROMOSOME_PATTERN = /^(?:[1-9]|1[0-9]|2[0-2]|X|Y|MT)$/i;
 const RAW_CALL_PATTERN = /^(?:[ACGTID]{1,2}|--)$/i;
 const DIPLOID_SNP_CALL_PATTERN = /^[ACGT]{2}$/i;
@@ -20,11 +20,11 @@ export function parseRawData(raw) {
   let skippedRows = 0;
   let duplicateRows = 0;
 
-  for (const rawLine of raw.split(/\\r?\\n/)) {
+  for (const rawLine of raw.split(/\r?\n/)) {
     const line = rawLine.trim();
     if (!line || line.startsWith("#")) continue;
 
-    const parts = line.split(/\\t|\\s+/);
+    const parts = line.split(/\t|\s+/);
     if (parts.length < 4) {
       skippedRows += 1;
       continue;
@@ -34,7 +34,7 @@ export function parseRawData(raw) {
     if (
       !RSID_PATTERN.test(rsid) ||
       !CHROMOSOME_PATTERN.test(chromosome) ||
-      !/^\\d+$/.test(position)
+      !/^\d+$/.test(position)
     ) {
       skippedRows += 1;
       continue;
