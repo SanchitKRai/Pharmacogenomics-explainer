@@ -55,11 +55,16 @@ Use the built-in synthetic example button in the app. It contains fabricated dat
 - [23andMe raw data limitations](https://support.23andme.org/hc/en-us/articles/42965238938391-Navigating-Your-Raw-Data) — only a subset of raw markers have been individually validated; raw data is informational, not medical/diagnostic.
 - [23andMe genotype format](https://support.23andme.org/hc/en-us/articles/42965202914711-How-23andMe-Reports-Genotypes) — genotype export fields and allele calls.
 
+## Design implementation
+
+The homepage follows the supplied GeneGuide Figma desktop layout and design tokens (canvas #060b11, surfaces #0d1722 / #132330, border #29404e, teal #70e8d3, Plus Jakarta Sans). The scientific hero illustration is stored locally in `assets/`; the app does not use expiring Figma URLs.
+
 ## Architecture
 
-- `index.html`: user interface.
-- `styles.css`: responsive styling.
+- `index.html`: Figma-aligned homepage and upload workspace.
+- `styles.css`: responsive styling using the GeneGuide Figma tokens.
 - `app.js`: local parsing, validation, marker matching, and rendering.
+- `assets/geneguide-scientific-illustration.png`: local hero artwork exported from the supplied Figma design.
 - `data/marker-panel.json`: small transparent educational marker panel.
 
 ## Current limitations / next research steps
