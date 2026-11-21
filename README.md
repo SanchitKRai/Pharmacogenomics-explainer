@@ -92,6 +92,26 @@ The homepage follows the supplied GeneGuide Figma desktop layout and design toke
 - `package.json`: test command; no runtime dependencies.
 - `assets/geneguide-scientific-illustration.png`: local hero artwork exported from the supplied Figma design.
 
+## CPIC / ClinPGx guideline mapping
+
+The app loads a dated, versioned local snapshot from `data/guideline-index.json`. It currently maps the marker-panel genes to six relevant CPIC guideline contexts: CYP2C19–clopidogrel, CYP2C19–proton pump inhibitors, serotonin reuptake inhibitor antidepressants, CYP3A5–tacrolimus, statins, and warfarin.
+
+Each entry records its publication year, source page, publication link, PMID / DOI where available, gene–drug pair, and a pair-level status:
+
+- `actionable_recommendations`: CPIC has actionable recommendations for at least one named drug in that gene pair.
+- `multi_gene_actionable`: the gene is part of a multi-gene guideline; the complete clinical algorithm requires more than this marker or gene alone.
+- `evaluated_without_actionable_recommendation`: the gene was evaluated in that guideline but CPIC does not provide an actionable recommendation for the named context.
+
+**Important:** This is gene-level guideline navigation, not variant-to-phenotype translation. The app does not claim that a raw rsID is sufficient for the guideline's allele definitions, diplotype, activity score, phenotype, or recommendations. The statin guideline includes CYP3A5 in its evaluation without an actionable recommendation for that gene in the statin context; CYP3A5 has a separate CPIC guideline for tacrolimus.
+
+The snapshot was checked against the official CPIC guideline directory on 2026-11-21 (29 guidelines listed on that directory at the time). The CPIC data repository's latest observed release was v1.60.1, dated 2026-08-12; the release notes describe it as an API fix and state that no database image was generated for that application-only release. The app therefore does **not** claim that the local snapshot is a direct or live API response. The public ClinPGx API is available as JSON, but its documentation notes that the API is under development and its parameters / responses may change; API use is also subject to rate limits and a data usage policy.
+
+Primary references:
+- [CPIC guideline directory](https://www.clinpgx.org/cpic/guidelines)
+- [CPIC Data API documentation and releases](https://github.com/cpicpgx/cpic-data)
+- [ClinPGx API](https://api.clinpgx.org/)
+- [CPIC licensing and terms](https://github.com/cpicpgx/cpic-data/blob/main/LICENSE.md)
+
 ## Current limitations / next research steps
 
 1. Integrate versioned, machine-readable ClinPGx allele and guideline data with provenance and license review.

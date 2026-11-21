@@ -166,3 +166,26 @@ button,input{font:inherit}
  .results-heading{align-items:start;flex-direction:column}.result-head{gap:8px}.gene-name{font-size:14px}
  .footer-main{min-height:100px;flex-wrap:wrap;padding-top:18px;padding-bottom:18px}.footer-tagline{font-size:9px;margin-left:0}.footer-github{margin-left:auto}
 }
+
+
+.guideline-context{margin:16px 0;padding:16px 17px;border:1px solid rgba(112,232,211,.22);border-radius:8px;background:rgba(112,232,211,.025)}
+.guideline-context-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--teal);font-size:10px;font-weight:800;letter-spacing:.45px}
+.guideline-context-heading span{color:var(--soft);font-size:8px;letter-spacing:.55px;text-align:right}
+.guideline-context-list{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.guideline-mini-card{min-width:0;padding:12px 13px;border:1px solid var(--border);border-radius:7px;background:rgba(6,11,17,.28)}
+.guideline-mini-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.guideline-year{color:var(--soft);font-size:8px;font-weight:800;letter-spacing:.5px;white-space:nowrap}
+.guideline-status{display:inline-flex;padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:8px;line-height:1.4;font-weight:800}
+.guideline-status-actionable{color:var(--teal);border-color:rgba(112,232,211,.3);background:rgba(112,232,211,.05)}
+.guideline-status-multigene{color:#b7c9ff;border-color:rgba(140,164,230,.35);background:rgba(140,164,230,.05)}
+.guideline-status-no-action{color:#e2c28c;border-color:rgba(226,194,140,.32);background:rgba(226,194,140,.05)}
+.guideline-mini-card h4{margin:9px 0 5px;color:var(--text);font-size:11px;line-height:1.45}
+.guideline-mini-card p{margin:6px 0 0;color:var(--muted);font-size:9px;line-height:1.65}
+.guideline-mini-card .guideline-drugs{color:#c0ced5}
+.guideline-mini-card .guideline-drugs strong{color:var(--soft)}
+.guideline-mini-links{display:flex;gap:13px;flex-wrap:wrap;margin-top:9px}
+.guideline-mini-links a{color:var(--teal);font-size:9px;font-weight:700;text-decoration:none}
+.guideline-mini-links a:hover{text-decoration:underline;text-underline-offset:3px}
+.guideline-context-disclaimer{margin:11px 0 0;color:var(--soft);font-size:9px;line-height:1.65}
+.guideline-context>p:not(.guideline-context-disclaimer){color:var(--muted);font-size:10px}
+@media(max-width:760px){.guideline-context-list{grid-template-columns:1fr}.guideline-context-heading{align-items:flex-start;flex-direction:column}.guideline-context-heading span{text-align:left}}

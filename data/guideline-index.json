@@ -1,0 +1,284 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_date": "2026-11-21",
+  "source": {
+    "name": "CPIC / ClinPGx guideline library",
+    "directory_url": "https://www.clinpgx.org/cpic/guidelines",
+    "data_repository": "https://github.com/cpicpgx/cpic-data",
+    "data_repository_releases": "https://github.com/cpicpgx/cpic-data/releases",
+    "latest_observed_release": "v1.60.1",
+    "latest_observed_release_date": "2026-08-12",
+    "release_note": "The v1.60.1 release is described as an API fix; the release page notes that no database image was generated for that application-only release.",
+    "guideline_count_on_directory_at_snapshot": 29,
+    "attribution": "CPIC requests attribution and current-source verification. CPIC curated content is made available under CC0 1.0; database/API access is additionally subject to the ClinPGx data usage policy.",
+    "license_url": "https://github.com/cpicpgx/cpic-data/blob/main/LICENSE.md",
+    "data_usage_policy_url": "https://www.clinpgx.org/page/dataUsagePolicy"
+  },
+  "interpretation_policy": [
+    "Guideline association is mapped at the gene–drug pair level, not as a variant-specific recommendation.",
+    "A raw rsID call is not a CPIC diplotype, metabolizer phenotype, or clinical test result.",
+    "The presence of a guideline link does not establish that a particular uploaded marker is sufficient for guideline interpretation.",
+    "Some guidelines evaluate genes for which no actionable recommendation is available; that status must remain explicit.",
+    "Read the current guideline and its updates before using any CPIC data in a clinical or research setting."
+  ],
+  "guidelines": [
+    {
+      "id": "cpic-cyp2c19-clopidogrel-2022",
+      "title": "CYP2C19 and Clopidogrel",
+      "display_title": "CYP2C19 and clopidogrel (2022 update)",
+      "year": 2022,
+      "source": "CPIC",
+      "source_url": "https://www.clinpgx.org/cpic/guidelines",
+      "publication_url": "https://files.cpicpgx.org/data/guideline/publication/clopidogrel/2022/35034351.pdf",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35034351/",
+      "pmid": "35034351",
+      "doi": "10.1002/cpt.2526",
+      "summary": "CPIC guidance describes how clinically determined CYP2C19 phenotypes can inform clopidogrel therapy. CYP2C19 is involved in bioactivation of this prodrug.",
+      "gene_pairs": [
+        {
+          "gene": "CYP2C19",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "clopidogrel"
+          ],
+          "status_label": "CPIC actionable recommendations available",
+          "scope_note": "The guideline uses a clinically interpreted CYP2C19 phenotype. One rsID call in a consumer file is not enough to assign that phenotype."
+        }
+      ]
+    },
+    {
+      "id": "cpic-cyp2c19-ppi-2021",
+      "title": "CYP2C19 and Proton Pump Inhibitor Dosing",
+      "display_title": "CYP2C19 and proton pump inhibitors (2021 publication)",
+      "year": 2021,
+      "source": "CPIC",
+      "source_url": "https://www.clinpgx.org/cpic/guidelines",
+      "publication_url": "https://files.cpicpgx.org/data/guideline/publication/PPI/2020/32770672.pdf",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32770672/",
+      "pmid": "32770672",
+      "doi": "10.1002/cpt.2015",
+      "summary": "CPIC provides CYP2C19 genotype-based guidance for selected proton pump inhibitors. The clinical context and duration of therapy matter.",
+      "gene_pairs": [
+        {
+          "gene": "CYP2C19",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "omeprazole",
+            "lansoprazole",
+            "pantoprazole",
+            "dexlansoprazole"
+          ],
+          "status_label": "CPIC actionable recommendations available",
+          "scope_note": "The guideline considers clinically determined CYP2C19 phenotypes; it does not define a phenotype from a single raw SNP."
+        }
+      ]
+    },
+    {
+      "id": "cpic-cyp2d6-cyp2c19-cyp2b6-sri-2023",
+      "title": "CYP2D6, CYP2C19, CYP2B6, SLC6A4, HTR2A and Serotonin Reuptake Inhibitor Antidepressants",
+      "display_title": "Serotonin reuptake inhibitor antidepressants (2023)",
+      "year": 2023,
+      "source": "CPIC",
+      "source_url": "https://www.clinpgx.org/guideline/PA166251452",
+      "publication_url": "https://pubmed.ncbi.nlm.nih.gov/37032427/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37032427/",
+      "pmid": "37032427",
+      "doi": "10.1002/cpt.2903",
+      "summary": "The guideline provides drug-specific recommendations for CYP2D6, CYP2C19 and CYP2B6. It describes evidence for SLC6A4 and HTR2A but does not support their clinical use for antidepressant prescribing.",
+      "gene_pairs": [
+        {
+          "gene": "CYP2D6",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "fluvoxamine",
+            "paroxetine",
+            "venlafaxine",
+            "vortioxetine"
+          ],
+          "status_label": "CPIC actionable recommendations available for selected drugs",
+          "scope_note": "The recommendation is drug- and phenotype-specific; this marker-only prototype does not assign the required CYP2D6 phenotype."
+        },
+        {
+          "gene": "CYP2C19",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "citalopram",
+            "escitalopram",
+            "sertraline"
+          ],
+          "status_label": "CPIC actionable recommendations available for selected drugs",
+          "scope_note": "The recommendation is drug- and phenotype-specific; this marker-only prototype does not assign the required CYP2C19 phenotype."
+        },
+        {
+          "gene": "CYP2B6",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "sertraline"
+          ],
+          "status_label": "CPIC actionable recommendations available for selected drugs",
+          "scope_note": "This gene is included in the guideline even though it is not part of the prototype marker panel."
+        },
+        {
+          "gene": "SLC6A4",
+          "status": "evaluated_without_actionable_recommendation",
+          "drugs": [
+            "selected serotonin reuptake inhibitor antidepressants"
+          ],
+          "status_label": "Evaluated; no actionable CPIC recommendation",
+          "scope_note": "The guideline reports insufficient/mixed evidence to support clinical use of SLC6A4 for antidepressant prescribing."
+        },
+        {
+          "gene": "HTR2A",
+          "status": "evaluated_without_actionable_recommendation",
+          "drugs": [
+            "selected serotonin reuptake inhibitor antidepressants"
+          ],
+          "status_label": "Evaluated; no actionable CPIC recommendation",
+          "scope_note": "The guideline reports insufficient/mixed evidence to support clinical use of HTR2A for antidepressant prescribing."
+        }
+      ]
+    },
+    {
+      "id": "cpic-cyp3a5-tacrolimus-2015",
+      "title": "CYP3A5 and Tacrolimus",
+      "display_title": "CYP3A5 and tacrolimus (2015)",
+      "year": 2015,
+      "source": "CPIC",
+      "source_url": "https://cpicpgx.org/guidelines/guideline-for-tacrolimus-and-CYP3A5/",
+      "publication_url": "https://pubmed.ncbi.nlm.nih.gov/25801146/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/25801146/",
+      "pmid": "25801146",
+      "doi": "10.1002/cpt.113",
+      "summary": "CPIC guidance covers the use of clinically interpreted CYP3A5 genotype results in tacrolimus dosing, alongside therapeutic drug monitoring.",
+      "gene_pairs": [
+        {
+          "gene": "CYP3A5",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "tacrolimus"
+          ],
+          "status_label": "CPIC actionable recommendations available",
+          "scope_note": "The guideline uses CYP3A5 diplotypes/phenotypes. This raw single-marker view does not determine expression status or a diplotype."
+        }
+      ]
+    },
+    {
+      "id": "cpic-slco1b1-abcg2-cyp2c9-statins-2022",
+      "title": "SLCO1B1, ABCG2, CYP2C9 and Statins",
+      "display_title": "SLCO1B1, ABCG2, CYP2C9 and statins (2022)",
+      "year": 2022,
+      "source": "CPIC",
+      "source_url": "https://www.clinpgx.org/guideline/PA166264281",
+      "publication_url": "https://pubmed.ncbi.nlm.nih.gov/35152405/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35152405/",
+      "pmid": "35152405",
+      "doi": "10.1002/cpt.2557",
+      "last_content_update": "2025-09",
+      "summary": "CPIC provides statin recommendations using SLCO1B1, ABCG2 and CYP2C9. The guideline also evaluates other genes; not every evaluated gene has an actionable recommendation.",
+      "gene_pairs": [
+        {
+          "gene": "SLCO1B1",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "simvastatin",
+            "atorvastatin",
+            "lovastatin",
+            "pitavastatin",
+            "pravastatin",
+            "rosuvastatin",
+            "fluvastatin"
+          ],
+          "status_label": "CPIC actionable recommendations available for selected statins",
+          "scope_note": "The c.521T>C marker appears in multiple SLCO1B1 haplotypes. A single rsID does not uniquely identify a star allele or transporter phenotype."
+        },
+        {
+          "gene": "ABCG2",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "rosuvastatin"
+          ],
+          "status_label": "CPIC actionable recommendations available for rosuvastatin",
+          "scope_note": "This gene is part of the guideline but is not included in the prototype marker panel."
+        },
+        {
+          "gene": "CYP2C9",
+          "status": "actionable_recommendations",
+          "drugs": [
+            "fluvastatin"
+          ],
+          "status_label": "CPIC actionable recommendations available for fluvastatin",
+          "scope_note": "This gene is part of the guideline but is not included in the prototype marker panel."
+        },
+        {
+          "gene": "CYP3A5",
+          "status": "evaluated_without_actionable_recommendation",
+          "drugs": [
+            "selected statins"
+          ],
+          "status_label": "Evaluated; no actionable CPIC recommendation in this statin guideline",
+          "scope_note": "CYP3A5 is evaluated within the statin guideline but is not among the genes with actionable CPIC recommendations for the listed statin pairs. This is distinct from the CYP3A5–tacrolimus guideline."
+        },
+        {
+          "gene": "CYP3A4",
+          "status": "evaluated_without_actionable_recommendation",
+          "drugs": [
+            "selected statins"
+          ],
+          "status_label": "Evaluated; no actionable CPIC recommendation",
+          "scope_note": "CYP3A4 is evaluated in the statin guideline but does not have an actionable recommendation in this guideline."
+        },
+        {
+          "gene": "HMGCR",
+          "status": "evaluated_without_actionable_recommendation",
+          "drugs": [
+            "selected statins"
+          ],
+          "status_label": "Evaluated; no actionable CPIC recommendation",
+          "scope_note": "HMGCR is evaluated in the statin guideline but does not have an actionable recommendation in this guideline."
+        }
+      ]
+    },
+    {
+      "id": "cpic-warfarin-2017",
+      "title": "CYP2C9, VKORC1, CYP4F2 and Warfarin",
+      "display_title": "Warfarin pharmacogenetics (2017 update)",
+      "year": 2017,
+      "source": "CPIC",
+      "source_url": "https://www.clinpgx.org/cpic/guidelines",
+      "publication_url": "https://pubmed.ncbi.nlm.nih.gov/28198005/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28198005/",
+      "pmid": "28198005",
+      "doi": "10.1002/cpt.668",
+      "summary": "The CPIC warfarin guideline uses multiple genetic factors, including VKORC1, CYP2C9 and CYP4F2, with ancestry-related considerations and clinical information.",
+      "gene_pairs": [
+        {
+          "gene": "VKORC1",
+          "status": "multi_gene_actionable",
+          "drugs": [
+            "warfarin"
+          ],
+          "status_label": "Part of a multi-gene CPIC dosing guideline",
+          "scope_note": "VKORC1 is interpreted together with CYP2C9, CYP4F2 and additional clinical factors. This app does not calculate a dose or replace INR monitoring."
+        },
+        {
+          "gene": "CYP2C9",
+          "status": "multi_gene_actionable",
+          "drugs": [
+            "warfarin"
+          ],
+          "status_label": "Part of a multi-gene CPIC dosing guideline",
+          "scope_note": "The warfarin guideline considers multiple alleles and other genes; one marker is not enough to reproduce its dosing algorithm."
+        },
+        {
+          "gene": "CYP4F2",
+          "status": "multi_gene_actionable",
+          "drugs": [
+            "warfarin"
+          ],
+          "status_label": "Part of a multi-gene CPIC dosing guideline",
+          "scope_note": "The warfarin guideline considers multiple genes and clinical information; CYP4F2 is not included in the prototype marker panel."
+        }
+      ]
+    }
+  ]
+}

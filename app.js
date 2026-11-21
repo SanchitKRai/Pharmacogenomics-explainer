@@ -1,12 +1,22 @@
 /* GeneGuide: educational marker-presence explainer. No clinical phenotype or prescribing logic. */
 import { parseRawData, classifyMarker } from "./genotype-parser.js";
 
-const panelResponse = await fetch(new URL("./data/marker-panel.json", import.meta.url));
+const [panelResponse, guidelineResponse] = await Promise.all([
+  fetch(new URL("./data/marker-panel.json", import.meta.url)),
+  fetch(new URL("./data/guideline-index.json", import.meta.url))
+]);
 if (!panelResponse.ok) {
   throw new Error("Could not load the marker panel. Refresh the page or contact the project maintainer.");
 }
-const panelData = await panelResponse.json();
+if (!guidelineResponse.ok) {
+  throw new Error("Could not load the CPIC guideline index. Refresh the page or contact the project maintainer.");
+}
+const [panelData, guidelineData] = await Promise.all([
+  panelResponse.json(),
+  guidelineResponse.json()
+]);
 const PANEL = panelData.markers;
+const GUIDELINES = guidelineData.guidelines;
 
 const fileInput = document.getElementById("genomeFile");
 const analyzeBtn = document.getElementById("analyzeBtn");
@@ -134,6 +144,7 @@ function resultCard(item) {
     '<section class="result-block"><strong>Marker context</strong><p>' + escapeHTML(marker.marker_meaning) + '</p></section>' +
     '<section class="result-block"><strong>What this does not establish</strong><p>' +
     escapeHTML(marker.interpretation_limit) + '</p></section></div>' +
+    renderGuidelineContext(marker.gene) +
     '<div class="result-meta"><span class="meta-tag">' + escapeHTML(marker.rsid) +
     '</span><span class="meta-tag">' + escapeHTML(marker.drug_context) +
     '</span><span class="meta-tag">RAW CALL ONLY</span></div>' +
@@ -141,6 +152,47 @@ function resultCard(item) {
     '" target="_blank" rel="noopener noreferrer">' + escapeHTML(marker.cpic_label) +
     ' ↗</a><a class="result-link secondary-link" href="' + escapeHTML(marker.dbsnp_url) +
     '" target="_blank" rel="noopener noreferrer">dbSNP record ↗</a></div></article>';
+}
+
+function renderGuidelineContext(gene) {
+  const matches = GUIDELINES.flatMap(guideline =>
+    guideline.gene_pairs
+      .filter(pair => pair.gene === gene)
+      .map(pair => ({ guideline, pair }))
+  );
+
+  if (!matches.length) {
+    return '<section class="guideline-context"><div class="guideline-context-heading">Related CPIC guideline context</div>' +
+      '<p>No matching entry is present in the current curated snapshot for this gene. Check the official CPIC directory.</p>' +
+      '<a class="result-link" href="https://www.clinpgx.org/cpic/guidelines" target="_blank" rel="noopener noreferrer">Open CPIC guideline directory ↗</a></section>';
+  }
+
+  return '<section class="guideline-context">' +
+    '<div class="guideline-context-heading">Related CPIC guideline context <span>GENE-LEVEL LINKS · NOT A PERSONAL RECOMMENDATION</span></div>' +
+    '<div class="guideline-context-list">' + matches.map(({ guideline, pair }) => {
+      const statusClass = pair.status === "actionable_recommendations"
+        ? "guideline-status-actionable"
+        : pair.status === "multi_gene_actionable"
+          ? "guideline-status-multigene"
+          : "guideline-status-no-action";
+      const statusLabel = pair.status_label || "Guideline context";
+      const drugs = (pair.drugs || []).join(" · ");
+      const sourceUrl = guideline.source_url || "https://www.clinpgx.org/cpic/guidelines";
+      const publicationUrl = guideline.publication_url || guideline.pubmed_url;
+      return '<article class="guideline-mini-card">' +
+        '<div class="guideline-mini-top"><span class="guideline-year">' + escapeHTML(String(guideline.year)) +
+        ' · CPIC</span><span class="guideline-status ' + statusClass + '">' + escapeHTML(statusLabel) + '</span></div>' +
+        '<h4>' + escapeHTML(guideline.display_title || guideline.title) + '</h4>' +
+        '<p class="guideline-drugs"><strong>Drug context:</strong> ' + escapeHTML(drugs) + '</p>' +
+        '<p>' + escapeHTML(pair.scope_note || guideline.summary) + '</p>' +
+        '<div class="guideline-mini-links"><a href="' + escapeHTML(sourceUrl) +
+        '" target="_blank" rel="noopener noreferrer">Guideline page ↗</a>' +
+        (publicationUrl ? '<a href="' + escapeHTML(publicationUrl) +
+          '" target="_blank" rel="noopener noreferrer">Publication ↗</a>' : '') +
+        '</div></article>';
+    }).join("") + '</div>' +
+    '<p class="guideline-context-disclaimer">These are gene–drug guideline links, not a conclusion that this raw variant is sufficient for clinical interpretation. Read the current guideline and its caveats.</p>' +
+    '</section>';
 }
 
 function unknownCard(item) {
