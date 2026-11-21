@@ -3,92 +3,141 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An educational pharmacogenomics explainer for consumer raw genotype files.">
-  <title>GeneGuide — Pharmacogenomics Explainer</title>
+  <meta name="theme-color" content="#060b11">
+  <meta name="description" content="An educational pharmacogenomics explainer connecting selected genetic markers with public guideline context.">
+  <title>GeneGuide — From DNA to research context</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="GeneGuide home"><span class="brand-mark">G</span><span>gene<span class="brand-light">guide</span></span></a>
-    <div class="top-meta"><span class="live-dot"></span> EDUCATIONAL RESEARCH PROTOTYPE <span class="top-divider">/</span> v0.1</div>
+  <header class="site-header" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="GeneGuide home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 30 36" fill="none"><path d="M8 3C23 9 7 14 22 20C8 26 23 30 8 33M22 3C7 9 23 14 8 20C22 26 7 30 22 33" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M10 7h10M9 14h12M9 22h12M10 29h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".65"/></svg>
+        </span>
+        <span>GeneGuide</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="active" href="#top">Home</a>
+        <a href="#workspace">Analyze</a>
+        <a href="#references">Guidelines</a>
+        <a href="#references">Resources</a>
+        <a href="#how">About</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="nav-search" href="#references" aria-label="Find resources"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg></a>
+        <a class="button button-outline nav-signin" href="https://github.com/SanchitKRai/Pharmacogenomics-explainer" target="_blank" rel="noopener noreferrer">View code</a>
+        <a class="button button-primary nav-cta" href="#workspace">Get started <span>→</span></a>
+      </div>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="eyebrow"><span class="eyebrow-line"></span> PHARMACOGENOMICS, MADE UNDERSTANDABLE</div>
-      <h1>Your DNA.<br><span class="gradient-text">A clearer picture</span><br>of drug response.</h1>
-      <p class="hero-copy">Explore how selected genetic markers connect to pharmacogenomics research and CPIC guideline topics — translated into plain language, without pretending a consumer file is a clinical test.</p>
-      <div class="hero-pills"><span>01 / Parse raw genotype</span><span>02 / Match known markers</span><span>03 / Explore guideline context</span></div>
-    </section>
-
-    <section class="upload-layout">
-      <div class="upload-card glass">
-        <div class="card-topline"><span class="step-number">01</span><span class="section-kicker">START WITH YOUR DATA</span><span class="privacy-label"><span class="lock-icon">◆</span> LOCAL PROCESSING</span></div>
-        <h2>Bring your raw data.</h2>
-        <p class="muted">Select a 23andMe-style <code>.txt</code> export. Your file is parsed in this browser; this demo has no genotype upload service.</p>
-        <label class="dropzone" id="dropzone" for="genomeFile">
-          <input id="genomeFile" type="file" accept=".txt,.tsv,text/plain,text/tab-separated-values">
-          <span class="upload-icon">↑</span>
-          <strong>Drop your raw data file here</strong>
-          <span class="drop-sub">or <u>browse files</u> · TXT / TSV</span>
-          <span class="file-chip" id="fileChip" hidden></span>
-        </label>
-        <div class="upload-actions">
-          <button id="analyzeBtn" class="button button-primary" disabled>Analyze markers <span>↗</span></button>
-          <button id="demoBtn" class="button button-ghost">Try synthetic demo data</button>
+    <section class="hero page-shell">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Pharmacogenomics, made understandable</div>
+        <h1>From your DNA to<br><span>the right therapy.</span></h1>
+        <p>Explore how selected genetic markers connect to pharmacogenomics research and public clinical-guideline context. Start with understanding, not a treatment decision.</p>
+        <div class="hero-actions">
+          <a class="button button-primary button-large" href="#workspace">Analyze your data <span>→</span></a>
+          <a class="button button-secondary button-large" href="#how"><span class="play-icon">▷</span> See how it works</a>
         </div>
-        <div class="format-note"><span class="note-icon">i</span><span>Expected columns: <code>rsid&nbsp;&nbsp; chromosome&nbsp;&nbsp; position&nbsp;&nbsp; genotype</code></span></div>
+        <div class="hero-boundary"><span></span> For learning and research only — not for clinical decision-making.</div>
       </div>
-
-      <aside class="trust-card">
-        <div class="trust-icon">⌁</div>
-        <div class="section-kicker">BUILT FOR TRANSPARENCY</div>
-        <h3>Not every missing marker is a normal result.</h3>
-        <p>Consumer genotyping arrays test selected locations. Missing data means <em>not assessed in this file</em> — not a confirmed reference allele.</p>
-        <div class="trust-rule"></div>
-        <div class="trust-stat"><strong>01</strong><span>Marker presence, not a diagnosis</span></div>
-        <div class="trust-stat"><strong>02</strong><span>No unsupported phenotype guesses</span></div>
-        <div class="trust-stat"><strong>03</strong><span>Guideline sources shown transparently</span></div>
-      </aside>
+      <figure class="hero-visual">
+        <div class="research-callout"><span>RESEARCH LENS</span><strong>Marker → evidence → context</strong></div>
+        <img src="assets/geneguide-scientific-illustration.png" alt="Conceptual scientific illustration showing a DNA helix and human head silhouette">
+        <figcaption><span>DNA <b>→</b> RESEARCH <b>→</b> CONTEXT</span><small>Conceptual illustration</small></figcaption>
+      </figure>
     </section>
 
-    <section id="resultsSection" class="results-section" hidden>
+    <section class="trust-row page-shell" aria-label="Research principles">
+      <article class="trust-card"><span class="micro-label">RESEARCH PRINCIPLE</span><h2>Curated markers</h2><p>A focused research lens.</p></article>
+      <article class="trust-card"><span class="micro-label">RESEARCH PRINCIPLE</span><h2>Public guideline context</h2><p>Read evidence in context.</p></article>
+      <article class="trust-card"><span class="micro-label">RESEARCH PRINCIPLE</span><h2>Transparent sources</h2><p>Keep uncertainty visible.</p></article>
+    </section>
+
+    <section class="workspace-section page-shell" id="workspace">
+      <div class="section-index">01 / YOUR STARTING POINT</div>
+      <div class="section-heading">
+        <h2>Start with your data</h2>
+        <p>A clear route from a file to a question worth exploring.</p>
+      </div>
+      <div class="workspace-panel">
+        <div class="upload-column">
+          <label class="dropzone" id="dropzone" for="genomeFile">
+            <input id="genomeFile" type="file" accept=".txt,.tsv,text/plain,text/tab-separated-values">
+            <span class="upload-symbol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 22V5m0 0-6 6m6-6 6 6M6 20v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <strong>Drop your genotype file here</strong>
+            <span class="drop-browse">or <u>browse files</u> · TXT / TSV</span>
+            <span class="file-chip" id="fileChip" hidden></span>
+            <span class="drop-hint">Expected columns: rsid · chromosome · position · genotype</span>
+          </label>
+          <div class="workspace-actions">
+            <button id="analyzeBtn" class="button button-primary" disabled>Analyze markers <span>→</span></button>
+            <button id="demoBtn" class="button button-outline"><span class="demo-star">◇</span> Try demo data</button>
+          </div>
+          <p class="upload-footnote">Your selected TXT / TSV file is parsed locally in this browser. No genotype rows are sent to a server by this static demo.</p>
+        </div>
+        <aside class="privacy-column">
+          <article class="privacy-item"><span class="privacy-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 19 6v5c0 4.8-3 8-7 10-4-2-7-5.2-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Local &amp; Private</h3><p>Your file is read in your browser; no server upload is used.</p></div></article>
+          <article class="privacy-item"><span class="privacy-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><div><h3>Evidence-based</h3><p>Designed to pair explanations with public guideline evidence.</p></div></article>
+          <article class="privacy-item"><span class="privacy-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><div><h3>Transparent</h3><p>Assessment status, sources and limitations stay beside each explanation.</p></div></article>
+        </aside>
+      </div>
+    </section>
+
+    <section id="resultsSection" class="results-section page-shell" hidden aria-live="polite">
       <div class="results-heading">
-        <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR FILE, DECODED</div><h2>Marker overview<span class="period">.</span></h2></div>
-        <button id="resetBtn" class="button button-ghost">Clear results ↺</button>
+        <div><div class="section-index">YOUR FILE / MARKER OVERVIEW</div><h2>What the file contains<span class="teal-dot">.</span></h2></div>
+        <button id="resetBtn" class="button button-outline">Clear results ↺</button>
       </div>
       <div class="summary-grid" id="summaryGrid"></div>
-      <div class="notice-banner"><span class="notice-symbol">!</span><p><strong>Read this before interpreting:</strong> These are marker-level matches, not star-allele calls, diplotypes, metabolizer phenotypes, or prescribing recommendations. A panel match does not establish clinical status.</p></div>
+      <div class="notice-banner"><span class="notice-mark">!</span><p><strong>Important boundary:</strong> These are marker-level matches, not star-allele calls, diplotypes, metabolizer phenotypes, or prescribing recommendations. A marker match does not establish clinical status.</p></div>
       <div class="results-list" id="resultsList"></div>
       <div class="not-found-wrap" id="notFoundWrap"></div>
-      <div class="data-footnote">Analysis is performed locally in your browser. No genome file is sent to a server by this static demo.</div>
+      <p class="data-footnote">Analysis is performed locally in your browser. No genome file is sent to a server by this static demo.</p>
     </section>
 
-    <section class="how-section">
-      <div class="eyebrow"><span class="eyebrow-line"></span> HOW IT WORKS</div>
-      <h2>Small steps. <span class="muted-title">Clear boundaries.</span></h2>
-      <div class="how-grid">
-        <article><span class="how-num">01</span><h3>Parse</h3><p>Read rsIDs and genotype calls from a tab-separated text export, skipping metadata comments.</p></article>
-        <article><span class="how-num">02</span><h3>Match</h3><p>Compare only against a documented educational marker panel. Unknown or absent markers stay unknown.</p></article>
-        <article><span class="how-num">03</span><h3>Explain</h3><p>Connect a marker to a gene, drug context, and authoritative guideline resource — without prescribing.</p></article>
+    <section class="how-section page-shell" id="how">
+      <div class="section-index">02 / HOW IT WORKS</div>
+      <h2>A little structure. A lot more clarity.</h2>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-eyebrow">METHOD / 01</span><span class="step-number">01 /</span><h3>Parse</h3><p>Read the structure before interpreting a marker.</p><span class="step-symbol">↗</span></article>
+        <span class="step-connector" aria-hidden="true">→</span>
+        <article class="step-card"><span class="step-eyebrow">METHOD / 02</span><span class="step-number">02 /</span><h3>Match</h3><p>Connect assessed markers to curated research context.</p><span class="step-symbol">⌘</span></article>
+        <span class="step-connector" aria-hidden="true">→</span>
+        <article class="step-card"><span class="step-eyebrow">METHOD / 03</span><span class="step-number">03 /</span><h3>Explain</h3><p>Explore meaning, sources and limitations together.</p><span class="step-symbol">✳</span></article>
       </div>
+      <p class="how-note">An explanation is not a recommendation. GeneGuide does not choose a drug, set a dose or make a diagnosis.</p>
     </section>
 
-    <section class="sources-section">
-      <div class="eyebrow"><span class="eyebrow-line"></span> REFERENCE DESK</div>
-      <h2>Grounded in public resources<span class="period">.</span></h2>
-      <div class="source-links">
-        <a href="https://cpicpgx.org/guidelines/" target="_blank" rel="noopener noreferrer"><span>CPIC Guidelines</span><b>↗</b><small>Clinical guideline library</small></a>
-        <a href="https://www.clinpgx.org/page/cpicResources" target="_blank" rel="noopener noreferrer"><span>ClinPGx Resources</span><b>↗</b><small>Structured data and API</small></a>
-        <a href="https://support.23andme.org/hc/en-us/articles/42965238938391-Navigating-Your-Raw-Data" target="_blank" rel="noopener noreferrer"><span>Raw Data Limitations</span><b>↗</b><small>23andMe support guidance</small></a>
+    <section class="reference-section" id="references">
+      <div class="page-shell">
+        <div class="section-index">03 / THE REFERENCE DESK</div>
+        <h2>Good questions deserve clear sources.</h2>
+        <p class="reference-intro">Explore the context behind pharmacogenomics. Open each source to read its original evidence and guidance.</p>
+        <div class="reference-grid">
+          <a class="reference-card" href="https://cpicpgx.org/guidelines/" target="_blank" rel="noopener noreferrer"><span class="ref-index">REFERENCE / 01</span><span class="ref-arrow">↗</span><h3>CPIC Guidelines</h3><p>Public clinical pharmacogenetic implementation guidelines.</p><small>OPEN GUIDELINE LIBRARY</small></a>
+          <a class="reference-card" href="https://www.clinpgx.org/page/cpicResources" target="_blank" rel="noopener noreferrer"><span class="ref-index">REFERENCE / 02</span><span class="ref-arrow">↗</span><h3>ClinPGx Resources</h3><p>Pharmacogenomics knowledge and structured resources.</p><small>EXPLORE DATA &amp; TOOLS</small></a>
+          <a class="reference-card" href="https://www.pharmgkb.org/" target="_blank" rel="noopener noreferrer"><span class="ref-index">REFERENCE / 03</span><span class="ref-arrow">↗</span><h3>PharmGKB</h3><p>Public pharmacogenomics knowledgebase and research.</p><small>EXPLORE THE KNOWLEDGEBASE</small></a>
+        </div>
+        <p class="independence-note">Independent educational prototype. No affiliation or endorsement is implied.</p>
       </div>
     </section>
   </main>
-  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">G</span><span>gene<span class="brand-light">guide</span></span></a><span>Built for learning, not clinical decision-making.</span><span>© 2026 GENE GUIDE</span></footer>
+
+  <footer class="site-footer">
+    <div class="footer-main page-shell">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 30 36" fill="none"><path d="M8 3C23 9 7 14 22 20C8 26 23 30 8 33M22 3C7 9 23 14 8 20C22 26 7 30 22 33" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M10 7h10M9 14h12M9 22h12M10 29h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".65"/></svg></span><span>GeneGuide</span></a>
+      <span class="footer-tagline">Pharmacogenomics / Evidence / Open Science</span>
+      <a class="footer-github" href="https://github.com/SanchitKRai/Pharmacogenomics-explainer" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">GH ↗</a>
+    </div>
+    <div class="footer-disclaimer page-shell"><strong>For learning and research only — not for clinical decision-making.</strong><span>Not a clinical test, diagnostic product or prescribing tool. Do not change treatment based on this prototype.</span><small>RESEARCH PROTOTYPE / DESIGNED FOR UNDERSTANDING</small></div>
+  </footer>
   <script src="app.js"></script>
 </body>
 </html>
