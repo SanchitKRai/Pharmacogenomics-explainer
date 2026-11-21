@@ -1,16 +1,17 @@
 # Pharmacogenomics Explainer
 
-A privacy-conscious educational prototype that reads a 23andMe-style raw genotype text export, finds selected pharmacogenomic marker IDs, and explains the relevant gene / drug guideline context in plain language.
+A privacy-conscious educational prototype that reads common consumer genotype TXT/TSV exports and single-sample VCF files, finds selected pharmacogenomic markers, and explains related gene / drug guideline context in plain language.
 
 > **Important:** This is an educational research prototype, not a medical device, diagnostic test, clinical pharmacogenetic report, or prescribing tool. It does not infer star alleles, diplotypes, metabolizer phenotypes, or treatment recommendations. Never start, stop, or change medication based on this app. Discuss clinical pharmacogenetic testing and results with a qualified clinician or pharmacist.
 
 ## What it does
 
-- Accepts a tab-separated TXT / TSV file with `rsid chromosome position genotype` columns.
-- Skips comment lines and validates the row structure.
-- Matches a small, versioned educational marker panel by rsID.
-- Displays raw genotype calls and links to CPIC gene / guideline resources and dbSNP records.
-- Separates three evidence states: **call found**, **unknown / no-call**, and **not found in file**.
+- Auto-detects standard 4-column TXT/TSV (`rsid`, `chromosome`, `position`, `genotype`) and AncestryDNA 5-column TXT/TSV (`allele1`, `allele2`) exports.
+- Parses single-sample VCF files by mapping the sample `GT` indexes through `REF` and `ALT`; multi-sample VCFs are rejected.
+- Tracks no-calls (`--`, `00`, VCF missing genotypes), indels, malformed rows/calls, and duplicate rsIDs in the summary.
+- Compares matched calls with curated build-specific reference/effect bases and shows a marker-level effect-allele copy-count state.
+- Labels GRCh37 / hg19 or GRCh38 / hg38 using exact chromosome/position matches; conflicting coordinates are marked mixed / unverified.
+- Keeps CPIC and dbSNP source links beside each marker.
 - Reads the genotype file in the browser; there is no server upload endpoint or server-side genotype storage.
 
 ## Evidence states
@@ -127,12 +128,12 @@ This layer is intentionally **not** an allele caller:
 
 The current snapshot observed PharmVar v6.2.29 (2026-09-22) and CPIC data v1.61.0 (2026-10-26). PharmVar allele definitions are licensed CC BY-SA 4.0; CPIC curated content is CC0 1.0, with attribution and current-source verification requested. See the provenance fields in `data/variant-evidence.json`.
 
-The parser currently displays the raw genotype call exactly as supplied. It does not harmonize reference genome build, genomic strand, transcript orientation or REF/ALT alleles. 23andMe states that its raw genotype calls are reported on the positive strand of the selected GRCh37 or GRCh38 assembly; other providers and databases may use different conventions. See [23andMe's reference genome and strand documentation](https://customercare.23andme.com/hc/en-us/articles/212883767-Which-Reference-Genome-and-Strand-Does-23andMe-Use).
+The parser now uses exact coordinates for the seven curated markers to label a likely GRCh37 or GRCh38 build and compares forward-strand bases. For non-VCF calls with unknown orientation it tries a reverse-complement match; palindromic A/T and C/G SNPs remain ambiguous without orientation evidence. VCF `REF/ALT` and `GT` calls are considered forward-strand. This is an educational matching layer, not a clinically validated genome-build or strand-harmonization pipeline. 23andMe documents the reference build and strand used in its raw data [here](https://customercare.23andme.com/hc/en-us/articles/212883767-Which-Reference-Genome-and-Strand-Does-23andMe-Use).
 
 ## Current limitations / next research steps
 
 1. Integrate versioned, machine-readable ClinPGx allele and guideline data with provenance and license review.
-2. Implement clinically validated reference-build and strand harmonization before any allele interpretation.
+2. Validate this educational coordinate and strand-matching layer against provider-specific formats and a clinically validated harmonization pipeline before any clinical use.
 3. For complex genes such as CYP2D6, support validated copy-number and structural-variant-aware data only.
 4. Obtain clinical pharmacogenetics expert review before adding phenotype or recommendation logic.
 

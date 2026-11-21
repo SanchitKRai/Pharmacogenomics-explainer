@@ -212,3 +212,23 @@ button,input{font:inherit}
 .variant-evidence-links a{color:var(--teal);font-size:9px;font-weight:700;text-decoration:none}
 .variant-evidence-links a:hover{text-decoration:underline;text-underline-offset:3px}
 @media(max-width:760px){.variant-evidence-heading{align-items:flex-start;flex-direction:column}.variant-evidence-heading span{text-align:left}}
+
+
+/* Marker parser upgrade: build, format and zygosity badges. */
+.summary-grid{grid-template-columns:repeat(auto-fit,minmax(145px,1fr))}
+.results-overview-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge-caption{font-size:8px;letter-spacing:.65px;color:var(--soft);font-weight:800}
+.build-badge,.format-badge{display:inline-flex;align-items:center;padding:5px 9px;border:1px solid var(--border);border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.2px}
+.build-confirmed{color:var(--teal);border-color:rgba(112,232,211,.32);background:rgba(112,232,211,.06)}
+.build-unverified{color:#e5c58f;border-color:rgba(229,197,143,.32);background:rgba(229,197,143,.05)}
+.build-muted,.format-badge{color:var(--muted);background:rgba(19,35,48,.45)}
+.allele-legend{margin-top:13px;color:var(--muted);font:10px ui-monospace,monospace;letter-spacing:.15px}
+.zygosity-pill{display:inline-flex;align-items:center;padding:6px 9px;border:1px solid var(--border);border-radius:5px;font-size:9px;font-weight:800;letter-spacing:.1px;white-space:nowrap}
+.zygosity-reference{color:#a9bfcb;border-color:rgba(169,191,203,.28);background:rgba(169,191,203,.06)}
+.zygosity-heterozygous{color:#e5c58f;border-color:rgba(229,197,143,.35);background:rgba(229,197,143,.06)}
+.zygosity-variant{color:#f0a5a5;border-color:rgba(240,165,165,.35);background:rgba(240,165,165,.06)}
+.zygosity-mismatch{color:#f0a5a5;border-color:rgba(240,165,165,.4);background:rgba(240,165,165,.06)}
+.zygosity-palindromic{color:#c6b2ee;border-color:rgba(198,178,238,.4);background:rgba(198,178,238,.06)}
+.strand-note{display:block;margin-top:7px;color:var(--muted);font-size:9px}
+.mismatch-note{color:#f0a5a5;line-height:1.6}
+@media(max-width:760px){.results-heading{align-items:flex-start;flex-direction:column}.results-overview-badges{margin-top:10px}.result-top-meta{justify-content:flex-start}}

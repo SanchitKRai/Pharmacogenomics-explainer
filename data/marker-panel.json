@@ -1,17 +1,20 @@
 {
-  "panel_version": "0.2.0",
+  "panel_version": "0.3.0",
   "last_reviewed": "2026-11-21",
   "scope": "A small educational marker-presence panel. Not a validated clinical pharmacogenetic test panel.",
-  "matching_policy": "The app matches rsIDs and displays raw calls only. It does not harmonize genome build or strand, infer star alleles, diplotypes or phenotypes, or issue medication recommendations.",
+  "matching_policy": "The app does not harmonize clinical results. It uses curated build coordinates and forward-strand allele mappings for educational marker-level display only; it does not assign star alleles, diplotypes, or phenotypes.",
   "evidence_states": {
     "found": "A structurally valid panel row contains a two-base A/C/G/T call. This means a raw call is available, not that a functional allele or phenotype has been identified.",
     "unknown": "The rsID occurs in the file, but the genotype is not interpretable by this SNP-only panel (for example --, an indel code, a single allele, a malformed call, or duplicate rsID rows).",
     "not_found": "The rsID does not occur in the file. Absence from a consumer array is not evidence of a reference genotype or absence of a variant."
   },
   "format_notes": [
-    "23andMe documents -- as a not-determined genotype call.",
-    "23andMe raw data may include insertions and deletions as well as SNPs; this panel's markers are treated as SNPs.",
-    "Only a subset of consumer raw-data markers have been individually validated by 23andMe."
+    "The parser detects 4-column rsid/chromosome/position/genotype TXT or TSV exports.",
+    "The parser detects AncestryDNA 5-column rsid/chromosome/position/allele1/allele2 TXT or TSV exports.",
+    "The parser supports single-sample VCF files with GT indexes mapped through REF and ALT nucleotide bases.",
+    "Multi-sample VCF files are rejected rather than silently choosing a sample.",
+    "No-calls, indels, malformed rows, and duplicate rsIDs are counted separately and are not converted to reference calls.",
+    "refAllele is the GRCh38 plus-strand reference allele; refAllelesByBuild and effectAllelesByBuild store assembly-specific bases where they differ, notably rs776746."
   ],
   "sources": [
     {
@@ -43,7 +46,26 @@
       "interpretation_limit": "This single raw call does not establish a CYP2C19 *2 allele, diplotype, metabolizer phenotype, clopidogrel response, or treatment choice. Strand/build harmonization and the full validated allele test matter.",
       "cpic_label": "CPIC CYP2C19 resources",
       "cpic_url": "https://cpicpgx.org/gene/CYP2C19/",
-      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4244285"
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4244285",
+      "chromosome": "10",
+      "grch37Pos": 96541616,
+      "grch38Pos": 94781859,
+      "refAllele": "G",
+      "effectAllele": "A",
+      "refAllelesByBuild": {
+        "grch37": "G",
+        "grch38": "G"
+      },
+      "effectAllelesByBuild": {
+        "grch37": "A",
+        "grch38": "A"
+      },
+      "alleles": [
+        "G",
+        "A"
+      ],
+      "starAllele": "*2",
+      "palindromic": false
     },
     {
       "rsid": "rs4986893",
@@ -56,7 +78,26 @@
       "interpretation_limit": "This single raw call does not establish a CYP2C19 *3 allele, diplotype, metabolizer phenotype, clopidogrel response, or treatment choice. Strand/build harmonization and the full validated allele test matter.",
       "cpic_label": "CPIC CYP2C19 resources",
       "cpic_url": "https://cpicpgx.org/gene/CYP2C19/",
-      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4986893"
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4986893",
+      "chromosome": "10",
+      "grch37Pos": 96540410,
+      "grch38Pos": 94780653,
+      "refAllele": "G",
+      "effectAllele": "A",
+      "refAllelesByBuild": {
+        "grch37": "G",
+        "grch38": "G"
+      },
+      "effectAllelesByBuild": {
+        "grch37": "A",
+        "grch38": "A"
+      },
+      "alleles": [
+        "G",
+        "A"
+      ],
+      "starAllele": "*3",
+      "palindromic": false
     },
     {
       "rsid": "rs12248560",
@@ -69,7 +110,26 @@
       "interpretation_limit": "A single promoter marker does not establish a *17 allele, full diplotype, metabolizer phenotype, or response to a particular drug. Haplotype context and validated testing are required.",
       "cpic_label": "CPIC CYP2C19 resources",
       "cpic_url": "https://cpicpgx.org/gene/CYP2C19/",
-      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs12248560"
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs12248560",
+      "chromosome": "10",
+      "grch37Pos": 96521657,
+      "grch38Pos": 94761900,
+      "refAllele": "C",
+      "effectAllele": "T",
+      "refAllelesByBuild": {
+        "grch37": "C",
+        "grch38": "C"
+      },
+      "effectAllelesByBuild": {
+        "grch37": "T",
+        "grch38": "T"
+      },
+      "alleles": [
+        "C",
+        "T"
+      ],
+      "starAllele": "*17",
+      "palindromic": false
     },
     {
       "rsid": "rs3892097",
@@ -82,20 +142,58 @@
       "interpretation_limit": "This one marker cannot establish a CYP2D6 *4 allele, diplotype, activity score, metabolizer phenotype, or opioid response. Structural variation and other defining variants may need assessment.",
       "cpic_label": "CPIC CYP2D6 guideline resources",
       "cpic_url": "https://cpicpgx.org/gene/CYP2D6/",
-      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs3892097"
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs3892097",
+      "chromosome": "22",
+      "grch37Pos": 42524947,
+      "grch38Pos": 42128945,
+      "refAllele": "C",
+      "effectAllele": "T",
+      "refAllelesByBuild": {
+        "grch37": "C",
+        "grch38": "C"
+      },
+      "effectAllelesByBuild": {
+        "grch37": "T",
+        "grch38": "T"
+      },
+      "alleles": [
+        "C",
+        "T"
+      ],
+      "starAllele": "*4",
+      "palindromic": false
     },
     {
       "rsid": "rs776746",
       "gene": "CYP3A5",
       "label": "CYP3A5 *3-associated splice marker",
       "variant": "Intron 3 splice variant · rs776746",
-      "context": "A common CYP3A5 splice variant used in CYP3A5 *3 allele interpretation.",
+      "context": "A common CYP3A5 splice variant used in CYP3A5 *3 allele interpretation. Its plus-strand reference and effect bases differ between GRCh37 and GRCh38.",
       "drug_context": "Tacrolimus",
       "marker_meaning": "This marker is relevant to CYP3A5 *3 interpretation. CPIC's tacrolimus guideline uses a CYP3A5 diplotype/phenotype framework, not this isolated row.",
-      "interpretation_limit": "This raw call alone does not establish CYP3A5 expression status or a complete diplotype. Other no-function alleles, assay coverage and validated interpretation matter.",
+      "interpretation_limit": "This raw call alone does not establish CYP3A5 expression status or a complete diplotype. Other no-function alleles, assembly orientation, assay coverage and validated interpretation matter.",
       "cpic_label": "CPIC tacrolimus / CYP3A5 guideline",
       "cpic_url": "https://cpicpgx.org/guidelines/guideline-for-tacrolimus-and-CYP3A5/",
-      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs776746"
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs776746",
+      "chromosome": "7",
+      "grch37Pos": 99270539,
+      "grch38Pos": 99672916,
+      "refAllele": "T",
+      "effectAllele": "C",
+      "refAllelesByBuild": {
+        "grch37": "C",
+        "grch38": "T"
+      },
+      "effectAllelesByBuild": {
+        "grch37": "T",
+        "grch38": "C"
+      },
+      "alleles": [
+        "C",
+        "T"
+      ],
+      "starAllele": "*3",
+      "palindromic": false
     },
     {
       "rsid": "rs4149056",
@@ -108,7 +206,26 @@
       "interpretation_limit": "This single marker cannot distinguish all SLCO1B1 haplotypes or establish a transporter phenotype or statin recommendation. The current CPIC statin guideline considers additional genes and clinical context.",
       "cpic_label": "CPIC statin guideline",
       "cpic_url": "https://cpicpgx.org/guidelines/cpic-guideline-for-statins/",
-      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4149056"
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4149056",
+      "chromosome": "12",
+      "grch37Pos": 21331549,
+      "grch38Pos": 21178615,
+      "refAllele": "T",
+      "effectAllele": "C",
+      "refAllelesByBuild": {
+        "grch37": "T",
+        "grch38": "T"
+      },
+      "effectAllelesByBuild": {
+        "grch37": "C",
+        "grch38": "C"
+      },
+      "alleles": [
+        "T",
+        "C"
+      ],
+      "starAllele": "c.521T>C",
+      "palindromic": false
     },
     {
       "rsid": "rs9923231",
@@ -121,7 +238,26 @@
       "interpretation_limit": "This marker alone does not calculate a warfarin dose, establish an overall genotype-based dose estimate, or replace INR monitoring and clinical assessment.",
       "cpic_label": "CPIC VKORC1 / warfarin resources",
       "cpic_url": "https://cpicpgx.org/gene/VKORC1/",
-      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs9923231"
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs9923231",
+      "chromosome": "16",
+      "grch37Pos": 31107689,
+      "grch38Pos": 31096368,
+      "refAllele": "C",
+      "effectAllele": "T",
+      "refAllelesByBuild": {
+        "grch37": "C",
+        "grch38": "C"
+      },
+      "effectAllelesByBuild": {
+        "grch37": "T",
+        "grch38": "T"
+      },
+      "alleles": [
+        "C",
+        "T"
+      ],
+      "starAllele": "-1639G>A",
+      "palindromic": false
     }
   ]
 }

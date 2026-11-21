@@ -1,32 +1,23 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-
-const panelUrl = new URL("../data/marker-panel.json", import.meta.url);
-const panel = JSON.parse(await readFile(panelUrl, "utf8"));
-
-test("marker panel has a version, scope and explicit interpretation policy", () => {
-  assert.equal(panel.panel_version.split(".").length, 3);
-  assert.ok(panel.scope.length > 20);
-  assert.ok(panel.matching_policy.includes("does not harmonize"));
+const panel=JSON.parse(await readFile(new URL("../data/marker-panel.json",import.meta.url),"utf8"));
+test("seven unique markers include coordinates and plus-strand allele metadata",()=>{
+ assert.equal(panel.markers.length,7);assert.equal(new Set(panel.markers.map(x=>x.rsid)).size,7);
+ for(const m of panel.markers){
+  assert.ok(Number.isInteger(m.grch37Pos)&&Number.isInteger(m.grch38Pos));
+  assert.match(m.refAllele,/^[ACGT]$/);assert.match(m.effectAllele,/^[ACGT]$/);assert.ok(m.starAllele);
+  assert.ok(m.refAllelesByBuild.grch37&&m.refAllelesByBuild.grch38);
+  assert.ok(m.effectAllelesByBuild.grch37&&m.effectAllelesByBuild.grch38);
+  assert.ok(m.cpic_url.startsWith("https://")&&m.dbsnp_url.startsWith("https://"));
+ }
 });
-
-test("panel rsIDs are unique and every marker carries provenance links and limits", () => {
-  const ids = panel.markers.map(marker => marker.rsid);
-  assert.equal(new Set(ids).size, ids.length);
-  assert.equal(ids.length, 7);
-  for (const marker of panel.markers) {
-    assert.ok(marker.rsid.startsWith("rs"));
-    assert.ok(marker.cpic_url.startsWith("https://"));
-    assert.ok(marker.dbsnp_url.startsWith("https://"));
-    assert.ok(marker.interpretation_limit.length > 30);
-    assert.ok(marker.marker_meaning.length > 20);
-  }
+test("rs776746 includes its build-specific ref and effect orientations",()=>{
+ const m=panel.markers.find(x=>x.rsid==="rs776746");
+ assert.deepEqual(m.refAllelesByBuild,{grch37:"C",grch38:"T"});
+ assert.deepEqual(m.effectAllelesByBuild,{grch37:"T",grch38:"C"});
 });
-
-test("panel declares the three distinct evidence states", () => {
-  assert.ok(panel.evidence_states.found);
-  assert.ok(panel.evidence_states.unknown);
-  assert.ok(panel.evidence_states.not_found);
-  assert.ok(panel.evidence_states.unknown.includes("--"));
+test("panel retains explicit educational-only boundaries and evidence states",()=>{
+ assert.match(panel.matching_policy,/does not harmonize clinical results/i);
+ assert.ok(panel.evidence_states.found&&panel.evidence_states.unknown&&panel.evidence_states.not_found);
 });

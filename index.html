@@ -69,18 +69,18 @@
       <div class="workspace-panel">
         <div class="upload-column">
           <label class="dropzone" id="dropzone" for="genomeFile">
-            <input id="genomeFile" type="file" accept=".txt,.tsv,text/plain,text/tab-separated-values">
+            <input id="genomeFile" type="file" accept=".txt,.tsv,.vcf,text/plain,text/tab-separated-values,application/vcf">
             <span class="upload-symbol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 22V5m0 0-6 6m6-6 6 6M6 20v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <strong>Drop your genotype file here</strong>
-            <span class="drop-browse">or <u>browse files</u> · TXT / TSV</span>
+            <span class="drop-browse">or <u>browse files</u> · TXT / TSV / VCF</span>
             <span class="file-chip" id="fileChip" hidden></span>
-            <span class="drop-hint">Expected columns: rsid · chromosome · position · genotype</span>
+            <span class="drop-hint">4-column TXT/TSV · AncestryDNA 5-column · single-sample VCF</span>
           </label>
           <div class="workspace-actions">
             <button id="analyzeBtn" class="button button-primary" disabled>Analyze markers <span>→</span></button>
             <button id="demoBtn" class="button button-outline"><span class="demo-star">◇</span> Try demo data</button>
           </div>
-          <p class="upload-footnote">Your selected TXT / TSV file is parsed locally in this browser. No genotype rows are sent to a server by this static demo.</p>
+          <p class="upload-footnote">Your selected TXT / TSV / VCF file is parsed locally in this browser. No genotype rows are sent to a server by this static demo.</p>
         </div>
         <aside class="privacy-column">
           <article class="privacy-item"><span class="privacy-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 19 6v5c0 4.8-3 8-7 10-4-2-7-5.2-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Local &amp; Private</h3><p>Your file is read in your browser; no server upload is used.</p></div></article>
@@ -92,11 +92,11 @@
 
     <section id="resultsSection" class="results-section page-shell" hidden aria-live="polite">
       <div class="results-heading">
-        <div><div class="section-index">YOUR FILE / MARKER OVERVIEW</div><h2>What the file contains<span class="teal-dot">.</span></h2></div>
+        <div><div class="section-index">YOUR FILE / MARKER OVERVIEW</div><h2>What the file contains<span class="teal-dot">.</span></h2><div class="results-overview-badges"><span class="badge-caption">GENOME BUILD</span><span id="buildBadge" class="build-badge build-muted">Unverified</span><span class="badge-caption">INPUT FORMAT</span><span id="formatBadge" class="format-badge">Not analysed</span></div></div>
         <button id="resetBtn" class="button button-outline">Clear results ↺</button>
       </div>
       <div class="summary-grid" id="summaryGrid"></div>
-      <div class="notice-banner"><span class="notice-mark">!</span><p><strong>Important boundary:</strong> These are marker-level matches, not star-allele calls, diplotypes, metabolizer phenotypes, or prescribing recommendations. A marker match does not establish clinical status.</p></div>
+      <div class="notice-banner"><span class="notice-mark">!</span><p><strong>MARKER MATCH ONLY — not a clinical phenotype or prescribing recommendation</strong>. These are educational, single-marker effect-allele copy counts only. They are not star-allele calls, diplotypes, metabolizer phenotypes, drug-response predictions, or treatment decisions.</p></div>
       <div class="results-list" id="resultsList"></div>
       <div class="unknown-wrap" id="unknownWrap"></div>
       <div class="not-found-wrap" id="notFoundWrap"></div>
