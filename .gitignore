@@ -1,0 +1,9 @@
+# Never commit personal genome or genotype data
+*.23andme.txt
+*genome*.txt
+*.vcf
+*.vcf.gz
+*.bam
+*.cram
+.env
+.DS_Store
