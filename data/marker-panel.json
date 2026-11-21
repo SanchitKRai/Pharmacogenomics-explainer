@@ -1,14 +1,127 @@
 {
-  "panel_version": "0.1.0",
-  "scope": "Educational marker-presence panel only. Not a validated clinical test panel.",
-  "interpretation_policy": "No star-allele, diplotype, phenotype, or prescribing recommendation inference.",
+  "panel_version": "0.2.0",
+  "last_reviewed": "2026-11-21",
+  "scope": "A small educational marker-presence panel. Not a validated clinical pharmacogenetic test panel.",
+  "matching_policy": "The app matches rsIDs and displays raw calls only. It does not harmonize genome build or strand, infer star alleles, diplotypes or phenotypes, or issue medication recommendations.",
+  "evidence_states": {
+    "found": "A structurally valid panel row contains a two-base A/C/G/T call. This means a raw call is available, not that a functional allele or phenotype has been identified.",
+    "unknown": "The rsID occurs in the file, but the genotype is not interpretable by this SNP-only panel (for example --, an indel code, a single allele, a malformed call, or duplicate rsID rows).",
+    "not_found": "The rsID does not occur in the file. Absence from a consumer array is not evidence of a reference genotype or absence of a variant."
+  },
+  "format_notes": [
+    "23andMe documents -- as a not-determined genotype call.",
+    "23andMe raw data may include insertions and deletions as well as SNPs; this panel's markers are treated as SNPs.",
+    "Only a subset of consumer raw-data markers have been individually validated by 23andMe."
+  ],
+  "sources": [
+    {
+      "name": "23andMe — How genotype calls are reported",
+      "url": "https://support.23andme.org/hc/en-us/articles/42965202914711-How-23andMe-Reports-Genotypes"
+    },
+    {
+      "name": "23andMe — Raw data limitations",
+      "url": "https://customercare.23andme.com/hc/en-us/articles/115004310067-Navigating-Your-Raw-Data"
+    },
+    {
+      "name": "CPIC guideline library",
+      "url": "https://cpicpgx.org/guidelines/"
+    },
+    {
+      "name": "ClinPGx / CPIC API resources",
+      "url": "https://api.cpicpgx.org/"
+    }
+  ],
   "markers": [
-    {"rsid":"rs4244285","gene":"CYP2C19","label":"*2-associated marker","guideline_context":"Clopidogrel and selected CYP2C19 substrate guidelines"},
-    {"rsid":"rs4986893","gene":"CYP2C19","label":"*3-associated marker","guideline_context":"Clopidogrel and selected CYP2C19 substrate guidelines"},
-    {"rsid":"rs12248560","gene":"CYP2C19","label":"*17-associated marker","guideline_context":"Selected CYP2C19 substrate guidelines"},
-    {"rsid":"rs3892097","gene":"CYP2D6","label":"Splice-variant marker","guideline_context":"Selected CYP2D6 substrate guidelines"},
-    {"rsid":"rs776746","gene":"CYP3A5","label":"*3-associated marker","guideline_context":"Tacrolimus guideline"},
-    {"rsid":"rs4149056","gene":"SLCO1B1","label":"c.521T>C marker","guideline_context":"Statin guideline context"},
-    {"rsid":"rs9923231","gene":"VKORC1","label":"-1639G>A marker","guideline_context":"Warfarin guideline context"}
+    {
+      "rsid": "rs4244285",
+      "gene": "CYP2C19",
+      "label": "Marker used in CYP2C19 *2 definition",
+      "variant": "c.681G>A · rs4244285",
+      "context": "A commonly studied CYP2C19 loss-of-function-associated variant marker.",
+      "drug_context": "Clopidogrel; selected proton-pump inhibitors",
+      "marker_meaning": "This rsID is part of the commonly used CYP2C19 *2 allele definition. The genotype shown is copied from the raw file only.",
+      "interpretation_limit": "This single raw call does not establish a CYP2C19 *2 allele, diplotype, metabolizer phenotype, clopidogrel response, or treatment choice. Strand/build harmonization and the full validated allele test matter.",
+      "cpic_label": "CPIC CYP2C19 resources",
+      "cpic_url": "https://cpicpgx.org/gene/CYP2C19/",
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4244285"
+    },
+    {
+      "rsid": "rs4986893",
+      "gene": "CYP2C19",
+      "label": "Marker used in CYP2C19 *3 definition",
+      "variant": "c.636G>A · rs4986893",
+      "context": "A commonly studied CYP2C19 no-function-associated variant marker.",
+      "drug_context": "Clopidogrel; selected proton-pump inhibitors",
+      "marker_meaning": "This rsID is part of the commonly used CYP2C19 *3 allele definition. The genotype shown is copied from the raw file only.",
+      "interpretation_limit": "This single raw call does not establish a CYP2C19 *3 allele, diplotype, metabolizer phenotype, clopidogrel response, or treatment choice. Strand/build harmonization and the full validated allele test matter.",
+      "cpic_label": "CPIC CYP2C19 resources",
+      "cpic_url": "https://cpicpgx.org/gene/CYP2C19/",
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4986893"
+    },
+    {
+      "rsid": "rs12248560",
+      "gene": "CYP2C19",
+      "label": "Promoter marker used in CYP2C19 *17 definition",
+      "variant": "−806C>T · rs12248560",
+      "context": "A commonly studied CYP2C19 promoter variant associated with increased expression in relevant haplotype contexts.",
+      "drug_context": "Selected CYP2C19 substrates; relevance is drug-specific",
+      "marker_meaning": "This promoter marker is part of the commonly used CYP2C19 *17 allele definition. The genotype shown is copied from the raw file only.",
+      "interpretation_limit": "A single promoter marker does not establish a *17 allele, full diplotype, metabolizer phenotype, or response to a particular drug. Haplotype context and validated testing are required.",
+      "cpic_label": "CPIC CYP2C19 resources",
+      "cpic_url": "https://cpicpgx.org/gene/CYP2C19/",
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs12248560"
+    },
+    {
+      "rsid": "rs3892097",
+      "gene": "CYP2D6",
+      "label": "CYP2D6 splice-site marker associated with *4",
+      "variant": "Splice-site variant · rs3892097",
+      "context": "A commonly studied CYP2D6 splice variant included in *4 allele definitions.",
+      "drug_context": "Selected CYP2D6 substrates, including codeine and tramadol",
+      "marker_meaning": "This rsID is one marker used in CYP2D6 allele interpretation. CYP2D6 has complex variation, including gene deletions, duplications and hybrid alleles.",
+      "interpretation_limit": "This one marker cannot establish a CYP2D6 *4 allele, diplotype, activity score, metabolizer phenotype, or opioid response. Structural variation and other defining variants may need assessment.",
+      "cpic_label": "CPIC CYP2D6 guideline resources",
+      "cpic_url": "https://cpicpgx.org/gene/CYP2D6/",
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs3892097"
+    },
+    {
+      "rsid": "rs776746",
+      "gene": "CYP3A5",
+      "label": "CYP3A5 *3-associated splice marker",
+      "variant": "Intron 3 splice variant · rs776746",
+      "context": "A common CYP3A5 splice variant used in CYP3A5 *3 allele interpretation.",
+      "drug_context": "Tacrolimus",
+      "marker_meaning": "This marker is relevant to CYP3A5 *3 interpretation. CPIC's tacrolimus guideline uses a CYP3A5 diplotype/phenotype framework, not this isolated row.",
+      "interpretation_limit": "This raw call alone does not establish CYP3A5 expression status or a complete diplotype. Other no-function alleles, assay coverage and validated interpretation matter.",
+      "cpic_label": "CPIC tacrolimus / CYP3A5 guideline",
+      "cpic_url": "https://cpicpgx.org/guidelines/guideline-for-tacrolimus-and-CYP3A5/",
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs776746"
+    },
+    {
+      "rsid": "rs4149056",
+      "gene": "SLCO1B1",
+      "label": "SLCO1B1 c.521T>C transporter marker",
+      "variant": "c.521T>C · p.Val174Ala · rs4149056",
+      "context": "A transporter variant associated with statin exposure and statin-associated musculoskeletal symptom research.",
+      "drug_context": "Statins (current CPIC guideline covers SLCO1B1, ABCG2 and CYP2C9)",
+      "marker_meaning": "The c.521T>C variant occurs in more than one SLCO1B1 haplotype, including *5 and *15. It is an important marker, but it is not a unique star-allele identifier.",
+      "interpretation_limit": "This single marker cannot distinguish all SLCO1B1 haplotypes or establish a transporter phenotype or statin recommendation. The current CPIC statin guideline considers additional genes and clinical context.",
+      "cpic_label": "CPIC statin guideline",
+      "cpic_url": "https://cpicpgx.org/guidelines/cpic-guideline-for-statins/",
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs4149056"
+    },
+    {
+      "rsid": "rs9923231",
+      "gene": "VKORC1",
+      "label": "VKORC1 −1639G>A regulatory marker",
+      "variant": "−1639G>A · rs9923231",
+      "context": "A regulatory marker associated with variation in warfarin dose requirements.",
+      "drug_context": "Warfarin (multi-gene CPIC guideline)",
+      "marker_meaning": "VKORC1 is one part of the CPIC warfarin pharmacogenetic guideline, which also considers CYP2C9 and CYP4F2 genotype.",
+      "interpretation_limit": "This marker alone does not calculate a warfarin dose, establish an overall genotype-based dose estimate, or replace INR monitoring and clinical assessment.",
+      "cpic_label": "CPIC VKORC1 / warfarin resources",
+      "cpic_url": "https://cpicpgx.org/gene/VKORC1/",
+      "dbsnp_url": "https://www.ncbi.nlm.nih.gov/snp/rs9923231"
+    }
   ]
-}
+}\n

@@ -22,14 +22,14 @@ Consumer SNP-array exports are not equivalent to clinical pharmacogene testing o
 This is a static app; no backend or API key is required.
 
 ```bash
-python -m http.server 8000
+python -m http.server 8000\n\n# In another terminal, run parser tests\nnpm test
 ```
 
 Open http://localhost:8000.
 
 ## Supported demo marker panel
 
-The included panel is illustrative and is not a complete clinical variant panel:
+The included panel is illustrative and is not a complete clinical variant panel. Panel definitions are versioned in `data/marker-panel.json` with a CPIC resource link and dbSNP record for each marker:
 
 | Marker | Gene | Context shown |
 |---|---|---|
@@ -63,7 +63,7 @@ The homepage follows the supplied GeneGuide Figma desktop layout and design toke
 
 - `index.html`: Figma-aligned homepage and upload workspace.
 - `styles.css`: responsive styling using the GeneGuide Figma tokens.
-- `app.js`: local parsing, validation, marker matching, and rendering.
+- `app.js`: browser UI, marker-state rendering, and local file handling.\n- `genotype-parser.js`: isolated parser and evidence-state classification logic.\n- `tests/genotype-parser.test.js`: automated tests for valid calls, no-calls, indels, duplicates, malformed rows and absent markers.\n- `package.json`: Node's built-in test runner (no runtime dependencies).
 - `assets/geneguide-scientific-illustration.png`: local hero artwork exported from the supplied Figma design.
 - `data/marker-panel.json`: small transparent educational marker panel.
 
@@ -78,3 +78,4 @@ The homepage follows the supplied GeneGuide Figma desktop layout and design toke
 ## Privacy
 
 The app reads the selected file in the browser and does not transmit genotype rows. Do not treat this as a security audit; review the code and browser network activity before using sensitive data. Avoid committing any personal genomic data to GitHub.
+\n\n## Automated tests\n\nRun `npm test` with Node.js 18 or newer. The test suite covers parser structure and all three marker evidence states. GitHub Actions runs the test suite before publishing the static site.\n
