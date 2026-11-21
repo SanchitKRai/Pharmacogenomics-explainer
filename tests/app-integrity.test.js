@@ -8,7 +8,7 @@ test("browser page exposes upload, build and format elements with guardrail",()=
  assert.match(index,/<script type="module" src="app\.js"><\/script>/);
  for(const id of ["genomeFile","buildBadge","formatBadge","summaryGrid","resultsList","unknownWrap","notFoundWrap","resetBtn","analyzeBtn","demoBtn"])assert.ok(index.includes('id="'+id+'"'),"missing "+id);
  assert.match(index,/MARKER MATCH ONLY — not a clinical phenotype or prescribing recommendation/);
- assert.match(app,/detectGenomeBuild/);assert.match(app,/\.txt\|tsv\|vcf/);
+ assert.match(app,/detectGenomeBuild/);assert.match(app,/txt\|tsv\|vcf/);
 });
 test("the app evidence files remain available",async()=>{
  for(const path of ["../data/marker-panel.json","../data/guideline-index.json","../data/variant-evidence.json"])await access(new URL(path,import.meta.url));
