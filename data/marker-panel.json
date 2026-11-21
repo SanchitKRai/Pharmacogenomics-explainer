@@ -1,0 +1,14 @@
+{
+  "panel_version": "0.1.0",
+  "scope": "Educational marker-presence panel only. Not a validated clinical test panel.",
+  "interpretation_policy": "No star-allele, diplotype, phenotype, or prescribing recommendation inference.",
+  "markers": [
+    {"rsid":"rs4244285","gene":"CYP2C19","label":"*2-associated marker","guideline_context":"Clopidogrel and selected CYP2C19 substrate guidelines"},
+    {"rsid":"rs4986893","gene":"CYP2C19","label":"*3-associated marker","guideline_context":"Clopidogrel and selected CYP2C19 substrate guidelines"},
+    {"rsid":"rs12248560","gene":"CYP2C19","label":"*17-associated marker","guideline_context":"Selected CYP2C19 substrate guidelines"},
+    {"rsid":"rs3892097","gene":"CYP2D6","label":"Splice-variant marker","guideline_context":"Selected CYP2D6 substrate guidelines"},
+    {"rsid":"rs776746","gene":"CYP3A5","label":"*3-associated marker","guideline_context":"Tacrolimus guideline"},
+    {"rsid":"rs4149056","gene":"SLCO1B1","label":"c.521T>C marker","guideline_context":"Statin guideline context"},
+    {"rsid":"rs9923231","gene":"VKORC1","label":"-1639G>A marker","guideline_context":"Warfarin guideline context"}
+  ]
+}
