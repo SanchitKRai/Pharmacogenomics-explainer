@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_date": "2026-11-21",
+  "provenance": {
+    "allele_definition_source": "PharmVar",
+    "pharmvar_version_observed": "6.2.29",
+    "pharmvar_version_date": "2026-09-22",
+    "pharmvar_gene_directory": "https://www.pharmvar.org/download",
+    "cpic_data_release_observed": "v1.61.0",
+    "cpic_data_release_date": "2026-10-26",
+    "cpic_data_release_url": "https://github.com/cpicpgx/cpic-data/releases/tag/v1.61.0",
+    "cpic_data_changelog": "https://github.com/cpicpgx/cpic-data/blob/main/data.tsv",
+    "source_note": "A small, manually curated subset of PharmVar allele-definition evidence for the marker panel. This is not a bulk PharmVar database export or a live ClinPGx API response.",
+    "pharmvar_license": "CC BY-SA 4.0",
+    "pharmvar_license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "cpic_content_license": "CC0 1.0 for curated CPIC content; database/API use remains subject to ClinPGx data usage policy.",
+    "cpic_license_url": "https://github.com/cpicpgx/cpic-data/blob/main/LICENSE.md",
+    "raw_genotype_orientation": "23andMe reports genotypes on the positive strand of the selected GRCh37 or GRCh38 assembly. This application currently preserves uploaded calls as supplied and does not harmonize genome build, strand, transcript orientation, or reference/alternate allele."
+  },
+  "interpretation_policy": [
+    "The database maps rsIDs to curated variant-definition evidence; it does not assign a star allele.",
+    "A variant may occur in multiple alleles or suballeles. A single rsID is not necessarily sufficient to identify a haplotype.",
+    "The allele functional status describes the named allele group in its source; it must not be assigned to an uploaded genotype by this application.",
+    "No diplotype, activity score, metabolizer phenotype, drug-response result, or medication recommendation is calculated.",
+    "CYP2D6 copy-number changes, deletions, duplications, hybrid genes, and complex structural alleles are not resolved.",
+    "Raw genotype calls are displayed exactly as supplied. No base-level effect-allele matching is attempted."
+  ],
+  "variants": [
+    {
+      "rsid": "rs4244285",
+      "gene": "CYP2C19",
+      "display_variant": "c.681G>A",
+      "reference_sequence": "NM_000769.4",
+      "molecular_effect": "Synonymous coding change associated with abnormal splicing.",
+      "evidence_summary": "Core defining variant for the CYP2C19*2 allele group. A ClinPGx update published 2026-08-07 explains that the core definition was revised: c.681G>A is now the only core variant defining *2 after newer *2 sequences were found that lacked previously listed core variants.",
+      "allele_associations": [
+        {
+          "allele": "CYP2C19*2",
+          "relationship": "Current core defining variant",
+          "functional_status": "No function",
+          "note": "This is the only core variant in the updated CYP2C19*2 core definition. Detection of the rsID in a raw file still does not establish the allele, phase, or diplotype."
+        }
+      ],
+      "allele_definition_url": "https://www.pharmvar.org/gene/CYP2C19",
+      "additional_evidence_url": "https://blog.clinpgx.org/cyp2c19-2-core-allele-definition-update/",
+      "clinical_context_url": "https://pubmed.ncbi.nlm.nih.gov/35034351/",
+      "additional_required_context": "Do not infer a *2 allele from a file match. The application does not harmonize allele orientation or confirm the test assay.",
+      "status": "curated_definition_evidence"
+    },
+    {
+      "rsid": "rs4986893",
+      "gene": "CYP2C19",
+      "display_variant": "c.636G>A (p.Trp212Ter)",
+      "reference_sequence": "NM_000769.4",
+      "molecular_effect": "Nonsense variant introducing a premature stop codon.",
+      "evidence_summary": "A core functional variant in the CYP2C19*3 allele definition. The current PharmVar *3 core definition also lists rs3758581 (c.991A>G); that second site illustrates why a single raw marker does not establish a complete haplotype.",
+      "allele_associations": [
+        {
+          "allele": "CYP2C19*3",
+          "relationship": "Core functional variant; not the entire core definition by itself",
+          "functional_status": "No function",
+          "note": "PharmVar's current core definition also includes rs3758581. This app has not assessed that additional site, phase, or other CYP2C19 alleles."
+        }
+      ],
+      "allele_definition_url": "https://www.pharmvar.org/gene/CYP2C19",
+      "clinical_context_url": "https://pubmed.ncbi.nlm.nih.gov/35034351/",
+      "additional_required_context": "The raw rsID match is not a *3 star-allele call or CYP2C19 phenotype.",
+      "status": "curated_definition_evidence"
+    },
+    {
+      "rsid": "rs12248560",
+      "gene": "CYP2C19",
+      "display_variant": "c.-806C>T",
+      "reference_sequence": "NM_000769.4",
+      "molecular_effect": "Promoter variant associated with increased CYP2C19 expression.",
+      "evidence_summary": "A core expression-associated variant in the CYP2C19*17 allele definition. The PharmVar *17 core definition also lists rs3758581 (c.991A>G); related CYP2C19 alleles can share this promoter marker.",
+      "allele_associations": [
+        {
+          "allele": "CYP2C19*17",
+          "relationship": "Core expression-associated variant; not the entire core definition by itself",
+          "functional_status": "Increased function",
+          "note": "The PharmVar core definition also includes rs3758581. Increased expression does not create a universal drug-response prediction; CPIC guidance is drug-specific."
+        }
+      ],
+      "allele_definition_url": "https://www.pharmvar.org/gene/CYP2C19",
+      "clinical_context_url": "https://pubmed.ncbi.nlm.nih.gov/35034351/",
+      "additional_required_context": "The raw rsID match is not a *17 star-allele or phenotype call. Drug effects are substrate-specific.",
+      "status": "curated_definition_evidence"
+    },
+    {
+      "rsid": "rs3892097",
+      "gene": "CYP2D6",
+      "display_variant": "c.506-1G>A (PharmVar locus notation: 1847G>A)",
+      "reference_sequence": "NM_000106.6",
+      "molecular_effect": "Splice-acceptor variant causing abnormal splicing.",
+      "evidence_summary": "Canonical splice-defect marker associated with the CYP2D6*4 allele group. The current PharmVar gene page lists multiple *4 suballeles containing rs3892097 alongside additional variants.",
+      "allele_associations": [
+        {
+          "allele": "CYP2D6*4",
+          "relationship": "Core splice-defect variant present across multiple *4 suballeles",
+          "functional_status": "No function",
+          "note": "Different *4 suballeles can carry additional variants. A single rsID does not resolve the full haplotype, diplotype, copy number, gene deletion, duplication, or CYP2D6/2D7 hybrid structure."
+        }
+      ],
+      "allele_definition_url": "https://www.pharmvar.org/gene/CYP2D6",
+      "clinical_context_url": "https://pubmed.ncbi.nlm.nih.gov/37032427/",
+      "additional_required_context": "CYP2D6 interpretation requires structurally aware clinical testing. This app does not infer a *4 allele or metabolizer phenotype.",
+      "status": "curated_definition_evidence"
+    },
+    {
+      "rsid": "rs776746",
+      "gene": "CYP3A5",
+      "display_variant": "c.219-237A>G (PharmVar locus notation: 6981A>G)",
+      "reference_sequence": "NM_000777.5",
+      "molecular_effect": "Intronic splice variant that creates a cryptic splice acceptor and disrupts normal RNA splicing.",
+      "evidence_summary": "Core splice-defect variant in the CYP3A5*3 allele group. PharmVar lists numerous *3 suballeles that share rs776746 but may contain other variants.",
+      "allele_associations": [
+        {
+          "allele": "CYP3A5*3",
+          "relationship": "Core defining splice variant",
+          "functional_status": "No function",
+          "note": "Other CYP3A5 no-function alleles also exist (including *6 and *7). A single rsID does not establish a full CYP3A5 diplotype or expression phenotype."
+        }
+      ],
+      "allele_definition_url": "https://www.pharmvar.org/gene/CYP3A5",
+      "clinical_context_url": "https://pubmed.ncbi.nlm.nih.gov/25801146/",
+      "additional_required_context": "The app does not assign CYP3A5 expression status or tacrolimus dosing.",
+      "status": "curated_definition_evidence"
+    },
+    {
+      "rsid": "rs4149056",
+      "gene": "SLCO1B1",
+      "display_variant": "c.521T>C (p.Val174Ala)",
+      "reference_sequence": "NM_006446.5",
+      "molecular_effect": "Missense variant associated with reduced OATP1B1 transporter activity.",
+      "evidence_summary": "The c.521T>C variant is found in multiple SLCO1B1 haplotypes. PharmVar lists it in *5 and *15-related definitions and in additional haplotypes; older guideline literature also discusses *17 as a legacy haplotype label. The same rsID is therefore not a unique star-allele identifier.",
+      "allele_associations": [
+        {
+          "allele": "SLCO1B1*5",
+          "relationship": "Single-variant haplotype containing rs4149056",
+          "functional_status": "Decreased function",
+          "note": "The c.521T>C variant is the defining variant for the *5 haplotype."
+        },
+        {
+          "allele": "SLCO1B1*15 and related suballeles",
+          "relationship": "Multi-variant haplotypes that include rs4149056",
+          "functional_status": "Decreased function",
+          "note": "The *15 group also contains rs2306283 and may include additional variants."
+        },
+        {
+          "allele": "SLCO1B1*47",
+          "relationship": "Multi-variant haplotype that includes rs4149056",
+          "functional_status": "Not assigned by this marker-only layer",
+          "note": "The PharmVar page lists rs4149056 together with rs2306283 and rs72559747 for *47."
+        }
+      ],
+      "allele_definition_url": "https://www.pharmvar.org/gene/SLCO1B1",
+      "clinical_context_url": "https://pubmed.ncbi.nlm.nih.gov/35152405/",
+      "additional_evidence_url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/24918167/",
+      "additional_required_context": "Do not distinguish *5 from *15-related or other haplotypes from rs4149056 alone. The statin guideline also uses ABCG2 and CYP2C9.",
+      "status": "curated_definition_evidence"
+    },
+    {
+      "rsid": "rs9923231",
+      "gene": "VKORC1",
+      "display_variant": "c.-1639G>A",
+      "reference_sequence": "NM_024006.5",
+      "molecular_effect": "Promoter/regulatory variant associated with lower VKORC1 expression.",
+      "evidence_summary": "This is a regulatory VKORC1 variant, not a star-allele assignment in the CYP-style PharmVar nomenclature used in this panel. The A allele is associated with increased warfarin sensitivity and lower dose requirements, but dose estimation is multi-gene and clinical.",
+      "allele_associations": [
+        {
+          "allele": "VKORC1 c.-1639G>A regulatory variant",
+          "relationship": "Regulatory locus; no CYP-style star allele assigned here",
+          "functional_status": "A allele associated with decreased expression",
+          "note": "The warfarin guideline considers VKORC1 together with CYP2C9, CYP4F2 and clinical variables; this app does not calculate doses."
+        }
+      ],
+      "allele_definition_url": "https://www.ncbi.nlm.nih.gov/books/NBK84174/table/warfarin.T.nomenclature_for_selected_vko/",
+      "clinical_context_url": "https://pubmed.ncbi.nlm.nih.gov/28198005/",
+      "additional_required_context": "A genotype string alone is not a warfarin dose or treatment recommendation.",
+      "status": "curated_definition_evidence"
+    }
+  ]
+}

@@ -6,13 +6,16 @@
     "directory_url": "https://www.clinpgx.org/cpic/guidelines",
     "data_repository": "https://github.com/cpicpgx/cpic-data",
     "data_repository_releases": "https://github.com/cpicpgx/cpic-data/releases",
-    "latest_observed_release": "v1.60.1",
-    "latest_observed_release_date": "2026-08-12",
-    "release_note": "The v1.60.1 release is described as an API fix; the release page notes that no database image was generated for that application-only release.",
+    "latest_observed_release": "v1.61.0",
+    "latest_observed_release_date": "2026-10-26",
+    "release_note": "The v1.61.0 release is dated 2026-10-26 and provides a full database export. The previous v1.60.1 release was an application-only API fix without a database image.",
     "guideline_count_on_directory_at_snapshot": 29,
     "attribution": "CPIC requests attribution and current-source verification. CPIC curated content is made available under CC0 1.0; database/API access is additionally subject to the ClinPGx data usage policy.",
     "license_url": "https://github.com/cpicpgx/cpic-data/blob/main/LICENSE.md",
-    "data_usage_policy_url": "https://www.clinpgx.org/page/dataUsagePolicy"
+    "data_usage_policy_url": "https://www.clinpgx.org/page/dataUsagePolicy",
+    "database_dump_url": "https://files.cpicpgx.org/data/database/cpic_db_dump-v1.61.0.sql.gz",
+    "release_url": "https://github.com/cpicpgx/cpic-data/releases/tag/v1.61.0",
+    "snapshot_basis": "The app stores a curated, static subset of guideline records. This version metadata identifies the latest observed upstream CPIC data release; it does not claim the local subset was generated directly from the database dump."
   },
   "interpretation_policy": [
     "Guideline association is mapped at the gene–drug pair level, not as a variant-specific recommendation.",

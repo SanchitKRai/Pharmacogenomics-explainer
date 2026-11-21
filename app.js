@@ -1,22 +1,22 @@
 /* GeneGuide: educational marker-presence explainer. No clinical phenotype or prescribing logic. */
 import { parseRawData, classifyMarker } from "./genotype-parser.js";
 
-const [panelResponse, guidelineResponse] = await Promise.all([
+const [panelResponse, guidelineResponse, variantEvidenceResponse] = await Promise.all([
   fetch(new URL("./data/marker-panel.json", import.meta.url)),
-  fetch(new URL("./data/guideline-index.json", import.meta.url))
+  fetch(new URL("./data/guideline-index.json", import.meta.url)),
+  fetch(new URL("./data/variant-evidence.json", import.meta.url))
 ]);
-if (!panelResponse.ok) {
-  throw new Error("Could not load the marker panel. Refresh the page or contact the project maintainer.");
+if (!panelResponse.ok || !guidelineResponse.ok || !variantEvidenceResponse.ok) {
+  throw new Error("Could not load one of the versioned evidence files. Refresh the page or contact the project maintainer.");
 }
-if (!guidelineResponse.ok) {
-  throw new Error("Could not load the CPIC guideline index. Refresh the page or contact the project maintainer.");
-}
-const [panelData, guidelineData] = await Promise.all([
+const [panelData, guidelineData, variantEvidenceData] = await Promise.all([
   panelResponse.json(),
-  guidelineResponse.json()
+  guidelineResponse.json(),
+  variantEvidenceResponse.json()
 ]);
 const PANEL = panelData.markers;
 const GUIDELINES = guidelineData.guidelines;
+const VARIANT_EVIDENCE = new Map(variantEvidenceData.variants.map(item => [item.rsid, item]));
 
 const fileInput = document.getElementById("genomeFile");
 const analyzeBtn = document.getElementById("analyzeBtn");
@@ -144,6 +144,7 @@ function resultCard(item) {
     '<section class="result-block"><strong>Marker context</strong><p>' + escapeHTML(marker.marker_meaning) + '</p></section>' +
     '<section class="result-block"><strong>What this does not establish</strong><p>' +
     escapeHTML(marker.interpretation_limit) + '</p></section></div>' +
+    renderVariantEvidence(marker.rsid) +
     renderGuidelineContext(marker.gene) +
     '<div class="result-meta"><span class="meta-tag">' + escapeHTML(marker.rsid) +
     '</span><span class="meta-tag">' + escapeHTML(marker.drug_context) +
@@ -152,6 +153,47 @@ function resultCard(item) {
     '" target="_blank" rel="noopener noreferrer">' + escapeHTML(marker.cpic_label) +
     ' ↗</a><a class="result-link secondary-link" href="' + escapeHTML(marker.dbsnp_url) +
     '" target="_blank" rel="noopener noreferrer">dbSNP record ↗</a></div></article>';
+}
+
+function renderVariantEvidence(rsid) {
+  const evidence = VARIANT_EVIDENCE.get(rsid);
+  if (!evidence) {
+    return '<section class="variant-evidence"><div class="variant-evidence-heading">Variant-to-allele evidence</div>' +
+      '<p>No curated allele-definition record is available for this marker in the current snapshot. This does not mean the marker has no known biology.</p></section>';
+  }
+
+  const associations = evidence.allele_associations.map(item =>
+    '<article class="allele-association">' +
+    '<div class="allele-association-top"><strong>' + escapeHTML(item.allele) + '</strong>' +
+    '<span>' + escapeHTML(item.functional_status) + '</span></div>' +
+    '<div class="allele-role">' + escapeHTML(item.relationship) + '</div>' +
+    '<p>' + escapeHTML(item.note) + '</p></article>'
+  ).join("");
+
+  const sourceLinks = [
+    evidence.allele_definition_url
+      ? '<a href="' + escapeHTML(evidence.allele_definition_url) + '" target="_blank" rel="noopener noreferrer">Allele definition source ↗</a>'
+      : "",
+    evidence.additional_evidence_url
+      ? '<a href="' + escapeHTML(evidence.additional_evidence_url) + '" target="_blank" rel="noopener noreferrer">Additional evidence ↗</a>'
+      : "",
+    evidence.clinical_context_url
+      ? '<a href="' + escapeHTML(evidence.clinical_context_url) + '" target="_blank" rel="noopener noreferrer">Clinical publication ↗</a>'
+      : ""
+  ].filter(Boolean).join("");
+
+  return '<section class="variant-evidence">' +
+    '<div class="variant-evidence-heading">Variant-to-allele evidence <span>REFERENCE EVIDENCE · NOT AN ALLELE CALL</span></div>' +
+    '<div class="variant-notation"><span>Sequence notation</span><strong>' +
+    escapeHTML(evidence.display_variant) + '</strong><small>' +
+    escapeHTML(evidence.reference_sequence || "Reference sequence not specified") + '</small></div>' +
+    '<p class="variant-molecular-effect">' + escapeHTML(evidence.molecular_effect) + '</p>' +
+    '<p class="variant-evidence-summary">' + escapeHTML(evidence.evidence_summary) + '</p>' +
+    '<div class="allele-association-list">' + associations + '</div>' +
+    '<p class="variant-limit"><strong>Interpretation boundary:</strong> ' +
+    escapeHTML(evidence.additional_required_context) + '</p>' +
+    '<div class="variant-evidence-links">' + sourceLinks + '</div>' +
+    '</section>';
 }
 
 function renderGuidelineContext(gene) {

@@ -12,6 +12,9 @@ test("guideline index has dated provenance and a source directory", () => {
   assert.ok(index.source.directory_url.startsWith("https://"));
   assert.ok(index.source.data_repository_releases.includes("github.com/cpicpgx/cpic-data"));
   assert.equal(index.guidelines.length, 6);
+  assert.equal(index.source.latest_observed_release, "v1.61.0");
+  assert.equal(index.source.latest_observed_release_date, "2026-10-26");
+  assert.ok(index.source.database_dump_url.endsWith("cpic_db_dump-v1.61.0.sql.gz"));
 });
 
 test("guideline identifiers are unique and each record has publication provenance", () => {

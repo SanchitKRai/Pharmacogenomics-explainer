@@ -104,13 +104,30 @@ Each entry records its publication year, source page, publication link, PMID / D
 
 **Important:** This is gene-level guideline navigation, not variant-to-phenotype translation. The app does not claim that a raw rsID is sufficient for the guideline's allele definitions, diplotype, activity score, phenotype, or recommendations. The statin guideline includes CYP3A5 in its evaluation without an actionable recommendation for that gene in the statin context; CYP3A5 has a separate CPIC guideline for tacrolimus.
 
-The snapshot was checked against the official CPIC guideline directory on 2026-11-21 (29 guidelines listed on that directory at the time). The CPIC data repository's latest observed release was v1.60.1, dated 2026-08-12; the release notes describe it as an API fix and state that no database image was generated for that application-only release. The app therefore does **not** claim that the local snapshot is a direct or live API response. The public ClinPGx API is available as JSON, but its documentation notes that the API is under development and its parameters / responses may change; API use is also subject to rate limits and a data usage policy.
+The snapshot was checked against the official CPIC guideline directory on 2026-11-21 (29 guidelines listed on that directory at the time). The latest CPIC data repository release observed for this snapshot was v1.61.0, dated 2026-10-26, with a full database export. The preceding v1.60.1 release (2026-08-12) was an application-only API fix without a database image. This release metadata does not imply that the app's curated local subset was generated directly from the database dump. The app therefore does **not** claim that the local snapshot is a direct or live API response. The public ClinPGx API is available as JSON, but its documentation notes that the API is under development and its parameters / responses may change; API use is also subject to rate limits and a data usage policy.
 
 Primary references:
 - [CPIC guideline directory](https://www.clinpgx.org/cpic/guidelines)
 - [CPIC Data API documentation and releases](https://github.com/cpicpgx/cpic-data)
 - [ClinPGx API](https://api.clinpgx.org/)
 - [CPIC licensing and terms](https://github.com/cpicpgx/cpic-data/blob/main/LICENSE.md)
+
+## Variant-to-allele evidence
+
+The app also loads `data/variant-evidence.json`, a dated, manually curated subset of official PharmVar allele-definition evidence for the seven marker-panel rsIDs. It displays the sequence notation, known allele-group associations, functional context where supported, and direct source links.
+
+This layer is intentionally **not** an allele caller:
+- It maps an rsID to documented allele-definition evidence; it does not assign a star allele to an uploaded genotype.
+- CYP2C19*2 core definition was updated in 2026: c.681G>A (rs4244285) is now the only core variant defining the *2 group. The prior core definition included additional variants that newer *2 sequences showed were not present in every *2 haplotype.
+- CYP2C19*3 and *17 definitions include additional core sequence context; the marker alone is insufficient to establish a haplotype.
+- CYP2D6*4 includes rs3892097 as a splice-defect variant, but the gene has complex suballeles and structural variation, including deletions, duplications and hybrid genes.
+- CYP3A5*3 is a splice-defect allele group containing rs776746; other CYP3A5 no-function alleles also exist.
+- SLCO1B1 rs4149056 occurs in multiple haplotypes; it cannot distinguish *5, *15-related or other allele groups on its own.
+- VKORC1 rs9923231 is shown as a regulatory variant, not assigned a CYP-style PharmVar star allele.
+
+The current snapshot observed PharmVar v6.2.29 (2026-09-22) and CPIC data v1.61.0 (2026-10-26). PharmVar allele definitions are licensed CC BY-SA 4.0; CPIC curated content is CC0 1.0, with attribution and current-source verification requested. See the provenance fields in `data/variant-evidence.json`.
+
+The parser currently displays the raw genotype call exactly as supplied. It does not harmonize reference genome build, genomic strand, transcript orientation or REF/ALT alleles. 23andMe states that its raw genotype calls are reported on the positive strand of the selected GRCh37 or GRCh38 assembly; other providers and databases may use different conventions. See [23andMe's reference genome and strand documentation](https://customercare.23andme.com/hc/en-us/articles/212883767-Which-Reference-Genome-and-Strand-Does-23andMe-Use).
 
 ## Current limitations / next research steps
 
